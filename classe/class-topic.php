@@ -37,6 +37,7 @@ public function __construct( $id_createur, $sujet, $description, $date_heure_cre
 public function connection_bdd()
 
 
+
     {
 
             try 
@@ -54,9 +55,140 @@ public function connection_bdd()
     }
 
 
+    public function afficher_topics_exsitants_public()
+
+    {
+        $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite = 0' );
+        $topics = $requete->fetchall();
+        $this->bdd = null;
 
 
+        foreach ($topics as $key => $value )
+            
+            { 
+                ?> 
+            
+            <div class="container d-block ">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+            
+                            <div class="card-header">
+                                <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                                    <div class="media-body ml-3"> <a href=""><?php echo $value['sujet'] ?> </a>
+                                        <div class="text-muted small"><?php echo $value['description'] ?></div>
+                                    </div>
+                                    <div class="text-muted small ml-3">
+                                        <div>Nombre de conversations<strong> php à insérer</strong></div>
+                                        <div>Nombre de messages<strong> php à insérer</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+            
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+                <?php
+            }
+            
 
+
+    }
+
+
+    public function afficher_topics_exsitants_user_connecte()
+
+    {
+        $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite <= 1' );
+        $topics = $requete->fetchall();
+        $this->bdd = null;
+
+
+        foreach ($topics as $key => $value )
+            
+            { 
+                ?> 
+            
+            <div class="container d-block ">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+            
+                            <div class="card-header">
+                                <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                                    <div class="media-body ml-3"> <a href=""><?php echo $value['sujet'] ?> </a>
+                                        <div class="text-muted small"><?php echo $value['description'] ?></div>
+                                    </div>
+                                    <div class="text-muted small ml-3">
+                                        <div>Nombre de conversations<strong> php à insérer</strong></div>
+                                        <div>Nombre de messages<strong> php à insérer</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+            
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+                <?php
+            }
+            
+
+
+    }
+
+
+    public function afficher_topics_exsitants_moderateur()
+
+    {
+        $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite <= 2' );
+        $topics = $requete->fetchall();
+        $this->bdd = null;
+
+
+        foreach ($topics as $key => $value )
+            
+            { 
+                ?> 
+            
+            <div class="container d-block ">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+            
+                            <div class="card-header">
+                                <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                                    <div class="media-body ml-3"> <a href=""><?php echo $value['sujet'] ?> </a>
+                                        <div class="text-muted small"><?php echo $value['description'] ?></div>
+                                    </div>
+                                    <div class="text-muted small ml-3">
+                                        <div>Nombre de conversations<strong> php à insérer</strong></div>
+                                        <div>Nombre de messages<strong> php à insérer</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+            
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+                <?php
+            }
+            
+
+
+    }
+    
 
 
 public function afficher_topics_exsitants_admin()
@@ -95,11 +227,12 @@ public function afficher_topics_exsitants_admin()
                 </div>
             </div>
             
-            
-                <?php
+            <?php
             }
             
-    var_dump($this->bdd);
+
+            include('../include/pages/formulaire_creation_topic.php');
+
 
     }
 

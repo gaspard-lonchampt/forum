@@ -33,11 +33,41 @@
 
 <?php
 
+
+$_SESSION['id_droit'] = 2;
+
     include('../classe/class-topic.php');
 
     $topic = new Topic(NULL,NULL, NULL,NULL, NULL);
 
-    $topic->afficher_topics_exsitants_admin();
+
+   if (!isset($_SESSION['id_droit']))
+    {
+        $topic->afficher_topics_exsitants_public();
+    }
+
+    elseif (@$_SESSION['id_droit'] == 0)
+    {
+        $topic->afficher_topics_exsitants_user_connecte();
+    }
+
+    elseif (@$_SESSION['id_droit'] == 1)
+    {
+        $topic->afficher_topics_exsitants_moderateur();
+    }
+
+    elseif (@$_SESSION['id_droit'] == 2)
+    {
+        $topic->afficher_topics_exsitants_admin();
+    }
+
+    else
+    {
+        echo ' y\'a un truc qui cloche Marty ' ;
+    }
+
+
+
 
 ?>
 
@@ -60,33 +90,9 @@
 
 
 
-
-
-
 </br></br></br></br></br></br></br></br></br></br>
 
-<div class="container d-block p-5">
-     <div class="row">
-         <div class="col-md-12">
-             <div class="card mb-4">
 
-                 <div class="card-header">
-                     <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                         <div class="media-body ml-3"> <a href="">Fuck fuck cat</a>
-                             <div class="text-muted small">Ceci est un forum d'entraide sur ces putains de chats</div>
-                         </div>
-                         <div class="text-muted small ml-3">
-                             <div>Nombre de conversations<strong> date en php à insérer</strong></div>
-                             <div>Nombre de messages<strong> date en php à insérer</strong></div>
-                         </div>
-                     </div>
-                 </div>
-
-  
-             </div>
-         </div>
-     </div>
- </div>
 
 
  <div class="container d-block p-5">
