@@ -18,6 +18,7 @@ public $id_visibilite;
 
 
 public function __construct( $id_createur, $sujet, $description, $date_heure_creation, $id_visibilite )
+
     {
        
         $this->id_createur = $id_createur ;
@@ -30,7 +31,11 @@ public function __construct( $id_createur, $sujet, $description, $date_heure_cre
     }
 
 
-function connection_bdd()
+
+
+
+public function connection_bdd()
+
 
     {
 
@@ -51,22 +56,52 @@ function connection_bdd()
 
 
 
-public function recherche_topics_existants()
+
+
+
+public function afficher_topics_exsitants_admin()
+
     {
-
-
-
         $requete = $this->bdd->query(' SELECT * FROM topics ' );
         $topics = $requete->fetchall();
-        $bdd = null;
+        $this->bdd = null;
 
-        return $topics;
-    // var_dump($donnees_messages );
+
+        foreach ($topics as $key => $value )
+            
+            { 
+                ?> 
+            
+            <div class="container d-block ">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+            
+                            <div class="card-header">
+                                <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                                    <div class="media-body ml-3"> <a href=""><?php echo $value['sujet'] ?> </a>
+                                        <div class="text-muted small"><?php echo $value['description'] ?></div>
+                                    </div>
+                                    <div class="text-muted small ml-3">
+                                        <div>Nombre de conversations<strong> php à insérer</strong></div>
+                                        <div>Nombre de messages<strong> php à insérer</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+            
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+                <?php
+            }
+            
+    var_dump($this->bdd);
 
     }
-
-
-
 
 
 

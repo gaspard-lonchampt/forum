@@ -16,22 +16,54 @@
   </header>
 
 
-  <?php
 
-include('../classe/class-topic.php');
 
-$topic = new Topic(NULL,NULL, NULL,NULL, NULL );
 
-$liste_topics = $topic->recherche_topics_existants();
 
-echo '<pre>';
-print_r($liste_topics) ;
-echo '</pre>';
+
+
+
+
+
+
+
+
+
+
+
+<?php
+
+    include('../classe/class-topic.php');
+
+    $topic = new Topic(NULL,NULL, NULL,NULL, NULL);
+
+    $topic->afficher_topics_exsitants_admin();
 
 ?>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</br></br></br></br></br></br></br></br></br></br>
 
 <div class="container d-block p-5">
      <div class="row">
