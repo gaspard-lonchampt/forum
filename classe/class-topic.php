@@ -1,7 +1,5 @@
 <?php
 
-
-
 class Topic
 
 {
@@ -12,10 +10,6 @@ public $sujet;
 public $description;
 public $date_heure_creation;
 public $id_visibilite;
-
-
-
-
 
 public function __construct( $id_createur, $sujet, $description, $date_heure_creation, $id_visibilite )
 
@@ -29,10 +23,6 @@ public function __construct( $id_createur, $sujet, $description, $date_heure_cre
         $this->bdd = $this->connection_bdd() ;
 
     }
-
-
-
-
 
 public function connection_bdd()
 
@@ -54,7 +44,6 @@ public function connection_bdd()
 
     }
 
-
     public function afficher_topics_exsitants_public()
 
     {
@@ -75,7 +64,7 @@ public function connection_bdd()
             
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href=""><?php echo $value['sujet'] ?> </a>
+                                    <div class="media-body ml-3"> <a href="conversations.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
@@ -120,7 +109,7 @@ public function connection_bdd()
             
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href=""><?php echo $value['sujet'] ?> </a>
+                                    <div class="media-body ml-3"> <a href="conversations.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
@@ -165,7 +154,7 @@ public function connection_bdd()
             
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href=""><?php echo $value['sujet'] ?> </a>
+                                    <div class="media-body ml-3"> <a href="conversations.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
@@ -195,11 +184,6 @@ public function afficher_topics_exsitants_admin()
 
     {
 
-        echo '<pre>';
-        print_r($_POST) ;
-        echo '</pre>';
-
-
         $requete = $this->bdd->query(' SELECT * FROM topics ' );
         $topics = $requete->fetchall();
         // $this->bdd = null;
@@ -217,7 +201,7 @@ public function afficher_topics_exsitants_admin()
             
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href=""><?php echo $value['sujet'] ?> </a>
+                                    <div class="media-body ml-3"> <a href="conversations.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
@@ -258,8 +242,10 @@ public function afficher_topics_exsitants_admin()
         // echo '</pre>';
         @$sujet = htmlspecialchars($_POST['Sujet']);
         @$Description = htmlspecialchars($_POST['Description']);
+
+        date_default_timezone_set('Europe/Paris');
         $today = date("Y-m-d H:i:s"); 
-        
+      
 
         $req = $this->bdd->prepare('INSERT INTO topics (	id_createur, sujet, description, date_heure_creation, id_visibilite ) VALUES(:id_createur, :sujet, :description, :date_heure_creation, :id_visibilite )');
         $req->execute(array(
@@ -281,20 +267,12 @@ public function afficher_topics_exsitants_admin()
     {
 
 
-        // echo '<pre>';
-        // print_r($_POST) ;
-        // echo '</pre>';
-      
-
         $req = $this->bdd->prepare('DELETE FROM topics where id = :id');
         $req->execute(array(
                         'id' => $_GET['id'],      
                      ));
 
         $this->bdd = null;
-
-        // header('location:new_topic_cree_confirm.php');
-
             
 
     }
