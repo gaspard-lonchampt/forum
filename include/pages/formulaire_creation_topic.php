@@ -7,7 +7,7 @@
   
       
 
-        <form name="connexion"  action="profil.php"  method="post">
+        <form name="connexion"  action="topics.php"  method="post">
         <h1 class="text-uppercase text-center mb-3">créer un nouveau topic</h1>
 
                 <p class="text-center text-primary"><?php if(isset($login_modifie)){echo $login_modifie;}?></p>
@@ -24,7 +24,7 @@
           <div class="control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
               <label>Sujet</label>
-              <input type="text" class="form-control" placeholder="Sujet" name="Sujet"  data-validation-required-message="Veuillez saisir le sujet.">
+              <input type="text" class="form-control" placeholder="Sujet" name="Sujet" required data-validation-required-message="Veuillez saisir le sujet.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -32,7 +32,7 @@
           <div class="control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
               <label>Description</label>
-              <input type="text" class="form-control" placeholder="Description" name="Description"  data-validation-required-message="Veuillez saisir votre mot de passe.">
+              <input type="text" class="form-control" placeholder="Description" name="Description" required  data-validation-required-message="Veuillez saisir votre mot de passe.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -41,28 +41,28 @@
           <p class='text-uppercase mt-5  mb-2'>visibilté :</p>
 
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <input class="form-check-input" type="radio" name="visibilite" id="exampleRadios1" value="0" checked>
             <label class="form-check-label" for="exampleRadios1">
                 Publique
             </label>
             </div>
 
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+            <input class="form-check-input" type="radio" name="visibilite" id="exampleRadios2" value="1">
             <label class="form-check-label" for="exampleRadios2">
                 Utilisateurs connectés
             </label>
             </div>
 
             <div class="form-check disabled">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
+            <input class="form-check-input" type="radio" name="visibilite" id="exampleRadios3" value="2" >
             <label class="form-check-label" for="exampleRadios3">
                 Modérateurs
             </label>
             </div>
 
             <div class="form-check disabled">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4" checked>
+            <input class="form-check-input" type="radio" name="visibilite" id="exampleRadios4" value="3" checked>
             <label class="form-check-label" for="exampleRadios4">
                 Admin
             </label>

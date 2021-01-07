@@ -194,9 +194,15 @@ public function connection_bdd()
 public function afficher_topics_exsitants_admin()
 
     {
+
+        echo '<pre>';
+        print_r($_POST) ;
+        echo '</pre>';
+
+
         $requete = $this->bdd->query(' SELECT * FROM topics ' );
         $topics = $requete->fetchall();
-        $this->bdd = null;
+        // $this->bdd = null;
 
 
         foreach ($topics as $key => $value )
@@ -233,36 +239,42 @@ public function afficher_topics_exsitants_admin()
 
             include('../include/pages/formulaire_creation_topic.php');
 
-
+           if ( isset($_POST['submit']))
+           {
+            $this->new_topic();
+           }
+        
     }
 
 
-
-public function new_topic()
+    public function new_topic()
     {
 
 
-        // var_dump( $bdd);
-
+        // echo '<pre>';
+        // print_r($_POST) ;
+        // echo '</pre>';
+        @$sujet = htmlspecialchars($_POST['Sujet']);
+        @$Description = htmlspecialchars($_POST['Description']);
+        $today = date("Y-m-d H:i:s"); 
+        
 
         $req = $this->bdd->prepare('INSERT INTO topics (	id_createur, sujet, description, date_heure_creation, id_visibilite ) VALUES(:id_createur, :sujet, :description, :date_heure_creation, :id_visibilite )');
         $req->execute(array(
-                        'id_createur' => $this->$id_createur,      
+                        'id_createur' => $_SESSION['id_createur'],      
                         'sujet' => $sujet, 
-                        'id_createur' => $description, 
-                        'id_createur' => $date_heure_creation, 
-                        'password' => $id_visibilite,));
+                        'description' => $Description, 
+                        'date_heure_creation' => $today, 
+                        'id_visibilite' => $_POST['visibilite'],));
 
         $this->bdd = null;
 
-                    $_SESSION['inscription_ok'] = 'Vous avez bien été inscrit sur le site';
+        header('location:new_topic_cree_confirm.php');
 
-                    header('Location: connexion.php');//redirection
-
-
-    var_dump( $this->bdd );
+            
 
     }
+
 
 
 
