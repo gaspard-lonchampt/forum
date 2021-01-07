@@ -27,4 +27,16 @@
     font-size: 1.2vw;
 }
 
+.valide{
+    color: rgb(47, 189, 106);
+    font-size: 1.2vw;
+}
+
+.deco{
+    text-decoration: none;
+    background-color: transparent;
+    border : 2px solid white;
+
+}
+
 

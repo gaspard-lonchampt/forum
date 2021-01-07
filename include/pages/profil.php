@@ -59,46 +59,57 @@
         
         <main>
             <section id="formulaire" class="container">
-                <article class="contenu_formulaire">
-                    <form action="profil.php" method="POST">
+                <article class="form_inscription row">
 
-                        <div class="form-group">
-                            <label for="user_name"> Nouveau login</label>
-                            <input type="text" class="form-control" id="user_name" name="login" value="<?php echo $_SESSION['user']['login'] ?>">
-                        </div>
+                    <div class="col-12 col-lg-6">
+                            <div class="img_inscription">
+                                <img src="../img/laptop.jpg" alt="laptop">
+                            </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="name">Nouveau nom</label>
-                            <input type="text" class="form-control" id="name" name="nom" value="<?php echo $_SESSION['user']['nom'] ?>" >
-                        </div>
+                    <div class="col-12 col-lg-6">
+                        <form action="profil.php" method="POST">
 
-                        <div class="form-group">
-                            <label for="prenom">Nouveau prenom</label>
-                            <input type="text" class="form-control" id="prenom" name="prenom" value="<?php echo $_SESSION['user']['prenom'] ?>" >
-                        </div>
+                            <div class="form-group">
+                                <label for="user_name"> Nouveau login</label>
+                                <input type="text" class="form-control" id="user_name" name="login" value="<?php echo $_SESSION['user']['login'] ?>">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="age">Nouvel age</label>
-                            <input class="form-control" type="number" id="age" name="age" value="<?php echo $_SESSION['user']['age'] ?>">
-                        </div>
+                            <div class="form-group">
+                                <label for="name">Nouveau nom</label>
+                                <input type="text" class="form-control" id="name" name="nom" value="<?php echo $_SESSION['user']['nom'] ?>" >
+                            </div>
 
-                        <div class="form-group">
-                            <label for="mdp"> Nouveau mot de passe </label>
-                            <input type="password" class="form-control" id="mdp" name="pass" >
-                        </div>
+                            <div class="form-group">
+                                <label for="prenom">Nouveau prenom</label>
+                                <input type="text" class="form-control" id="prenom" name="prenom" value="<?php echo $_SESSION['user']['prenom'] ?>" >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="age">Nouvel age</label>
+                                <input class="form-control" type="number" id="age" name="age" value="<?php echo $_SESSION['user']['age'] ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mdp"> Nouveau mot de passe </label>
+                                <input type="password" class="form-control" id="mdp" name="pass" >
+                            </div>
 
 
-                        <div class="form-group">
-                            <label for="confirm_mdp">Confirmation du nouveau mot de passe </label>
-                            <input type="password" class="form-control" id="confirm_mdp" name="confirm_pass" >
-                        </div>
-                        <?php if(isset($msg)) { echo $msg ;} ?>
-                        <div>
-                            <input class="btn btn-outline-primary" type="submit" value="Modifier mon profil" name="valider">
-                        </div>
+                            <div class="form-group">
+                                <label for="confirm_mdp">Confirmation du nouveau mot de passe </label>
+                                <input type="password" class="form-control" id="confirm_mdp" name="confirm_pass" >
+                            </div>
+                            <?php if(isset($msg)) { echo $msg ;} ?>
+                            <div>
+                                <input class="btn btn-outline-primary" type="submit" value="Modifier mon profil" name="valider">
+                            </div>
 
-                    </form>
+                        </form>
+                    </div>
+
                 </article>
+
 
             </section>
         </main>

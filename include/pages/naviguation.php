@@ -61,6 +61,17 @@
                     echo 'pages/contact.php';
                 }?>">Contact</a>
           </li>
+
+          <?php 
+            if(isset($_SESSION['user']) && !isset($repere))
+            {
+                echo '<li class="nav-item"><a class="deco" href="../pages/logout.php"> Déconnexion </a></li>' ;
+            }
+            elseif(isset($_SESSION['user']) && isset($repere))
+            {
+                echo '<li class="nav-item"><a class="deco" href="pages/logout.php"> Déconnexion </a></li>' ;
+            }
+          ?>
         </ul>
       </div>
     </div>
