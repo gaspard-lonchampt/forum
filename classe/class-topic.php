@@ -223,6 +223,8 @@ public function afficher_topics_exsitants_admin()
                                     <div class="text-muted small ml-3">
                                         <div>Nombre de conversations<strong> php à insérer</strong></div>
                                         <div>Nombre de messages<strong> php à insérer</strong></div>
+                                        </br>
+                                        <div ><a class="text-danger" href="supprimer_topic_confirm.php?id=<?php echo $value['id'];?>">supprimer le topic</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -275,7 +277,27 @@ public function afficher_topics_exsitants_admin()
 
     }
 
+    public function supprimer_topic()
+    {
 
+
+        // echo '<pre>';
+        // print_r($_POST) ;
+        // echo '</pre>';
+      
+
+        $req = $this->bdd->prepare('DELETE FROM topics where id = :id');
+        $req->execute(array(
+                        'id' => $_GET['id'],      
+                     ));
+
+        $this->bdd = null;
+
+        // header('location:new_topic_cree_confirm.php');
+
+            
+
+    }
 
 
 
