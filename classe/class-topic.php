@@ -49,12 +49,13 @@ public function connection_bdd()
     {
         $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite = 0' );
         $topics = $requete->fetchall();
-        $this->bdd = null;
+        
 
 
         foreach ($topics as $key => $value )
             
-            { 
+            {   $nombre_conversations = $this->compter_nombre_conversation($value['id']);
+                $nombre_messages = $this->compter_nombre_messages($value['id']);
                 ?> 
             
             <div class="container d-block ">
@@ -68,8 +69,8 @@ public function connection_bdd()
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Nombre de conversations<strong> php à insérer</strong></div>
-                                        <div>Nombre de messages<strong> php à insérer</strong></div>
+                                        <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
+                                        <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                     </div>
                                 </div>
                             </div>
@@ -82,6 +83,8 @@ public function connection_bdd()
             
             
                 <?php
+
+
             }
             
 
@@ -91,15 +94,18 @@ public function connection_bdd()
 
     public function afficher_topics_exsitants_user_connecte()
 
+
     {
         $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite <= 1' );
         $topics = $requete->fetchall();
-        $this->bdd = null;
+
 
 
         foreach ($topics as $key => $value )
             
-            { 
+            {   $nombre_conversations = $this->compter_nombre_conversation($value['id']);
+                $nombre_messages = $this->compter_nombre_messages($value['id']);
+
                 ?> 
             
             <div class="container d-block ">
@@ -113,8 +119,8 @@ public function connection_bdd()
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Nombre de conversations<strong> php à insérer</strong></div>
-                                        <div>Nombre de messages<strong> php à insérer</strong></div>
+                                        <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
+                                        <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                     </div>
                                 </div>
                             </div>
@@ -127,6 +133,7 @@ public function connection_bdd()
             
             
                 <?php
+    
             }
             
 
@@ -134,17 +141,20 @@ public function connection_bdd()
     }
 
 
+
     public function afficher_topics_exsitants_moderateur()
 
     {
         $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite <= 2' );
         $topics = $requete->fetchall();
-        $this->bdd = null;
+
 
 
         foreach ($topics as $key => $value )
             
-            { 
+            {   $nombre_conversations = $this->compter_nombre_conversation($value['id']);
+                $nombre_messages = $this->compter_nombre_messages($value['id']);
+
                 ?> 
             
             <div class="container d-block ">
@@ -158,8 +168,8 @@ public function connection_bdd()
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Nombre de conversations<strong> php à insérer</strong></div>
-                                        <div>Nombre de messages<strong> php à insérer</strong></div>
+                                        <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
+                                        <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                     </div>
                                 </div>
                             </div>
@@ -172,6 +182,7 @@ public function connection_bdd()
             
             
                 <?php
+
             }
             
 
@@ -186,12 +197,11 @@ public function afficher_topics_exsitants_admin()
 
         $requete = $this->bdd->query(' SELECT * FROM topics ' );
         $topics = $requete->fetchall();
-        // $this->bdd = null;
-
 
         foreach ($topics as $key => $value )
             
-            { 
+            {   $nombre_conversations = $this->compter_nombre_conversation($value['id']);
+                $nombre_messages = $this->compter_nombre_messages($value['id']);
                 ?> 
             
             <div class="container d-block ">
@@ -205,21 +215,21 @@ public function afficher_topics_exsitants_admin()
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Nombre de conversations<strong> php à insérer</strong></div>
-                                        <div>Nombre de messages<strong> php à insérer</strong></div>
+                                        <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
+                                        <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                         </br>
                                         <div ><a class="text-danger" href="supprimer_topic_confirm.php?id=<?php echo $value['id'];?>">supprimer le topic</a></div>
                                     </div>
                                 </div>
-                            </div>
-            
-            
+                            </div>     
                         </div>
                     </div>
                 </div>
             </div>
             
             <?php
+  
+          
             }
             
 
@@ -233,7 +243,7 @@ public function afficher_topics_exsitants_admin()
     }
 
 
-    public function new_topic()
+public function new_topic()
     {
 
 
@@ -263,7 +273,7 @@ public function afficher_topics_exsitants_admin()
 
     }
 
-    public function supprimer_topic()
+public function supprimer_topic()
     {
 
 
@@ -279,8 +289,41 @@ public function afficher_topics_exsitants_admin()
 
 
 
+public function compter_nombre_conversation($a)
+    {
+
+        $req = $this->bdd->prepare('SELECT COUNT(*) FROM conversations where id_topic = :id ');
+        $req->execute(array(
+                'id' => $a,      
+                ));
+
+        // echo '<pre>';
+        // print_r($topics) ;
+        // echo '</pre>';
 
 
+        return $resultat_conversations = $req->fetch();
+
+
+    }
+
+
+public function compter_nombre_messages($a)
+    {
+
+        $req = $this->bdd->prepare('SELECT COUNT(*) FROM messages where id_topic = :id ');
+        $req->execute(array(
+                'id' => $a,      
+                ));
+
+
+        return $resultat_messages = $req->fetch();
+
+        // echo '<pre>';
+        // print_r($resultat_messages) ;
+        // echo '</pre>';
+
+    }
 
 
 
