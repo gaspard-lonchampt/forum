@@ -1,4 +1,5 @@
 <?php 
+session_start();
 $repere = true;
 require ('include/pages/head.php'); 
 require ('include/pages/naviguation.php'); 

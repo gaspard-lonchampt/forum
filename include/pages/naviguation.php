@@ -34,32 +34,33 @@
                     echo 'pages/conversation.php';
                 }?>">Topic</a>
           </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="<?php 
-                if (!isset($repere)) {
-                    echo '../pages/about.php';
+                if (!isset($repere) && !isset($_SESSION['user'])) {
+                    echo '../pages/inscription.php';
                 }
-                else {
-                    echo 'pages/about.php';
-                }?>">About</a>
+                elseif(isset($repere)) {
+                    echo 'pages/inscription.php';
+                }?>">Inscription</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php 
-                if (!isset($repere)) {
-                    echo '../pages/post.php';
+                if (!isset($repere) && !isset($_SESSION['user'])) {
+                    echo '../pages/connexion.php';
                 }
                 else {
-                    echo 'pages/post.php';
-                }?>">Sample Post</a>
+                    echo 'pages/connexion.php';
+                }?>">Connexion</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php 
-                if (!isset($repere)) {
-                    echo '../pages/contact.php';
+                if (!isset($repere) && isset($_SESSION['user'])) {
+                    echo '../pages/profil.php';
                 }
                 else {
-                    echo 'pages/contact.php';
-                }?>">Contact</a>
+                    echo 'pages/profil.php';
+                }?>">Profil</a>
           </li>
 
           <?php 
