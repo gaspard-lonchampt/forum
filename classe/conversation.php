@@ -37,7 +37,7 @@ class Conversation {
 
         include ('../include/pages/conv_form.php');
 
-        // NE SOIT PAS TROP LARGUE, SI LAORA TA FAIT UN BISOUS TU LA GRONDE MAIS NE SOIT PAS GROGNON
+        // NE SOIT PAS TROP LARGUE
         if (isset($_POST['conversation_submit'])) {
 
             $sujet = htmlspecialchars($_POST['conversation_sujet']);
