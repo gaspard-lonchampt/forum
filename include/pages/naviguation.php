@@ -40,7 +40,7 @@
                 if (!isset($repere) && !isset($_SESSION['user'])) {
                     echo '../pages/inscription.php';
                 }
-                elseif(isset($repere)) {
+                else {
                     echo 'pages/inscription.php';
                 }?>">Inscription</a>
           </li>
