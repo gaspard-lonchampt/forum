@@ -6,7 +6,7 @@ if(!isset($_SESSION['user']))
     header("Location: ../index.php") ; 
 }
 
-include ("../classes/class_utilisateur.php"); 
+include ("../classe/class_utilisateur.php"); 
 include ('../include/pages/naviguation.php'); 
 include ('../include/pages/profil.php'); 
 

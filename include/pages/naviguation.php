@@ -37,7 +37,7 @@
           
           <li class="nav-item">
             <a class="nav-link" href="<?php 
-                if (!isset($repere) && !isset($_SESSION['user'])) {
+                if (!isset($repere)) {
                     echo '../pages/inscription.php';
                 }
                 else {
@@ -46,7 +46,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php 
-                if (!isset($repere) && !isset($_SESSION['user'])) {
+                if (!isset($repere)) {
                     echo '../pages/connexion.php';
                 }
                 else {
@@ -55,7 +55,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php 
-                if (!isset($repere) && isset($_SESSION['user'])) {
+                if (!isset($repere)) {
                     echo '../pages/profil.php';
                 }
                 else {
