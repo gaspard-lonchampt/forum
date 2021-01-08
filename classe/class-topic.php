@@ -40,11 +40,17 @@ public function connection_bdd()
             }
 
 
-        return $bdd;
+            return $bdd;
 
     }
 
-    public function afficher_topics_exsitants_public()
+
+
+
+
+
+
+public function afficher_topics_exsitants_public()
 
     {
         $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite = 0' );
@@ -92,6 +98,8 @@ public function connection_bdd()
     }
 
 
+
+
     public function afficher_topics_exsitants_user_connecte()
 
 
@@ -133,7 +141,7 @@ public function connection_bdd()
             
             
                 <?php
-    
+                   $this->bdd = null;
             }
             
 
@@ -180,7 +188,7 @@ public function connection_bdd()
                 </div>
             </div>
             
-            
+          
                 <?php
 
             }
@@ -228,7 +236,7 @@ public function afficher_topics_exsitants_admin()
             </div>
             
             <?php
-  
+ 
           
             }
             

@@ -34,7 +34,7 @@
 <?php
 
 
-$_SESSION['id_droit'] = 0;
+// $_SESSION['id_droit'] = 1;
 // $_SESSION['id_createur'] = 2;
 
     include('../classe/class-topic.php');
