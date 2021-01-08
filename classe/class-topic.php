@@ -141,7 +141,7 @@ public function afficher_topics_exsitants_public()
             
             
                 <?php
-                   $this->bdd = null;
+             
             }
             
 
