@@ -28,10 +28,10 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php 
                 if (!isset($repere)) {
-                    echo '../pages/conversation.php';
+                    echo '../pages/topics.php';
                 }
                 else {
-                    echo 'pages/conversation.php';
+                    echo 'pages/topics.php';
                 }?>">Topic</a>
           </li>
           
