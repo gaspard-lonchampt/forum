@@ -71,7 +71,7 @@ public function afficher_topics_exsitants_public()
             
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href="conversations.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
+                                    <div class="media-body ml-3"> <a href="conversation.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
@@ -123,7 +123,7 @@ public function afficher_topics_exsitants_public()
             
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href="conversations.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
+                                    <div class="media-body ml-3"> <a href="conversation.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
@@ -172,7 +172,7 @@ public function afficher_topics_exsitants_public()
             
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href="conversations.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
+                                    <div class="media-body ml-3"> <a href="conversation.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
@@ -219,7 +219,7 @@ public function afficher_topics_exsitants_admin()
             
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href="conversations.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
+                                    <div class="media-body ml-3"> <a href="conversation.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
