@@ -34,7 +34,9 @@
                     echo 'pages/topics.php';
                 }?>">Topic</a>
           </li>
-          
+          <?php
+          if(!isset($_SESSION['user'])){
+              ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php 
                 if (!isset($repere)) {
@@ -44,6 +46,13 @@
                     echo 'pages/inscription.php';
                 }?>">Inscription</a>
           </li>
+          <?php
+          }
+          ?>
+
+          <?php
+          if(!isset($_SESSION['user'])){
+              ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php 
                 if (!isset($repere)) {
@@ -53,6 +62,13 @@
                     echo 'pages/connexion.php';
                 }?>">Connexion</a>
           </li>
+          <?php
+          }
+          
+
+          
+          if(isset($_SESSION['user'])){
+              ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php 
                 if (!isset($repere)) {
@@ -62,7 +78,10 @@
                     echo 'pages/profil.php';
                 }?>">Profil</a>
           </li>
-
+          <?php
+          }
+          ?>
+          
           <?php 
             if(isset($_SESSION['user']) && !isset($repere))
             {

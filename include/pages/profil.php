@@ -36,6 +36,11 @@
                 $msg = '<p class="error"> Veuillez remplir tous les champs </p>'; 
             }
         }
+
+        if($_SESSION['user']['id_droit'] == 2)
+        {
+            $link_admin = '<a href="../pages/modif_droit.php"> Modifier les droits des utilisateurs </a>' ; 
+        }
         
         ?>
 
@@ -106,6 +111,7 @@
                             </div>
 
                         </form>
+                        <?php if(isset($link_admin)){ echo $link_admin ;} ?>
                     </div>
 
                 </article>
