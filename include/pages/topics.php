@@ -27,7 +27,7 @@
     $topic = new Topic(NULL,NULL, NULL,NULL, NULL);
 
 
-   if (@$_SESSION['visiteur'] == 0)
+   if  (!isset($_SESSION['user']['id_droit']))
     {
         $topic->afficher_topics_exsitants_public();
     }
@@ -45,6 +45,7 @@
     elseif (@$_SESSION['user']['id_droit'] == 3)
     {
         $topic->afficher_topics_exsitants_admin();
+        
     }
 
     else
