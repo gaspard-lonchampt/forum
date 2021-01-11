@@ -17,29 +17,42 @@
 
 <?php
 
-    $_SESSION['id_droit'] = 2;
+    $_SESSION['user']['id_droit'] = 0;
 
     include ('../classe/conversation.php'); 
     $conversation = new Conversation (NULL, NULL, NULL, NULL, NULL, NULL); 
 
-    if (!isset($_SESSION['id_droit'])) {
+    if (!isset($_SESSION['user']['id_droit'])) {
       $conversation->display_conversation_public();
     }
 
-    elseif ($_SESSION['id_droit'] == 0) {
+    elseif ($_SESSION['user']['id_droit'] == 0) {
+      
+      $conversation->create_conversation();
       $conversation->display_conversation_user ();
+      
     }
 
-    elseif ($_SESSION['id_droit'] == 1) {
+    elseif ($_SESSION['user']['id_droit'] == 1) {
+      $conversation->create_conversation();
       $conversation->display_conversation_moderateur ();
+     
     }
 
-    elseif ($_SESSION['id_droit'] == 2) {
+    elseif ($_SESSION['user']['id_droit'] == 2) {
+      $conversation->create_conversation();
       $conversation->display_conversation_admin ();
+      
     }
 
     else {
       echo "C'est pas une science exacte, on est à une vache près";
     }
+
+    
+      
+
+      
+
 
 ?>

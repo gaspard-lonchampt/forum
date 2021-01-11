@@ -1,11 +1,10 @@
-<form>
-  <div class="form-group">
+<form action="conversation.php" method="POST" >
+  <div class="container border p-4">
+  <h1 class="text-center">Créer une nouvelle conversation</h1>
+  <div class="form-group container d-flex flex-column justify-content-center p-4">
     <label for="Votre sujet">Sujet</label>
     <input type="text" class="form-control" id="conversation_sujet" name="conversation_sujet">
   </div>
-  <div class="form-group">
-    <label for="Votre description">Description</label>
-    <input type="text-area" class="form-control" id="conversation_description" name="conversation_description">
+  <button type="submit" class="btn btn-primary ml-4 " name="conversation_submit">Créer</button>
   </div>
-  <button type="submit" class="btn btn-primary" name="conversation_submit">Submit</button>
 </form>
