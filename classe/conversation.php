@@ -1,19 +1,23 @@
 <?php
 
+
+
+// Infos transmises par $_SESSIOn[id_droit], par défaut à 0 (rajouter une condition pour éviter les conflits lorsqu'ils sont connectés ) 
+// id_topic transmis en get
+
+
 class Conversation {
 
     private $id;
     public $id_topic; 
-    public $id_conversation;
     public $date_creation; 
     public $sujet;
     public $id_createur;
     public $id_visbilite;
 
-    public function __construct($id_topic, $id_conversation, $date_creation, $sujet, $id_createur, $id_visibilite)
+    public function __construct($id_topic, $date_creation, $sujet, $id_createur, $id_visibilite)
     {
         $this->id_topic = $id_topic ;
-        $this->id_conversation = $id_conversation;
         $this->date_creation = $date_creation;
         $this->sujet = $sujet;
         $this->id_createur = $id_createur;
@@ -44,26 +48,16 @@ class Conversation {
             @$description = htmlspecialchars($_POST['conversation_description']);
             date_default_timezone_set('Europe/Paris');
             @$date = date("Y-m-d H:i:s"); 
+            @$id_topic = $_GET['id'];
+            $test = 2;
 
-            // POUR TESTER
-
-            @$id_topic = 1;
-            @$id_conversation = 1;
-            @$id_visbilite = 2;
-            $_SESSION['user']['id'] = 1;
-            $_SESSION['user']['id_droit'] = 1;
-
-
-            $requete_create = $this->db->prepare("INSERT INTO conversations (id_topic, id_conversation, date_creation, sujet, id_createur, id_visibilite) VALUES(:id_topic, :id_conversation, :date_creation, :sujet, :id_createur, :id_visibilite)");      
+            $requete_create = $this->db->prepare("INSERT INTO conversations (id_topic, date_creation, sujet, id_createur, id_visibilite) VALUES(:id_topic, :date_creation, :sujet, :id_createur, :id_visibilite)");      
             $requete_create->execute(array(
                 'id_topic' => $id_topic,
-                'id_conversation' => $id_conversation,
                 'date_creation' => $date,
                 'sujet' => $sujet,
                 'id_createur' => $_SESSION['user']['id'],
-                'id_visibilite' => $_SESSION['user']['id_droit'],
-                ));
-            
+                'id_visibilite' => $test));
          }
     }
 
@@ -71,7 +65,7 @@ class Conversation {
     
     public function display_conversation_public () {
 
-        $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs WHERE utilisateurs.id_droit<1 ORDER BY conversations.date_creation DESC");
+        $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id_droit=0 INNER JOIN topics ON topics.id=conversations.id_topic ORDER BY conversations.date_creation DESC");
         $conversation= $requete->fetchall();
 
 
@@ -112,7 +106,7 @@ class Conversation {
 
     public function display_conversation_user () {
 
-        $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs WHERE utilisateurs.id_droit=0 ORDER BY conversations.date_creation DESC");
+        $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id_droit<=1 INNER JOIN topics ON topics.id=conversations.id_topic ORDER BY conversations.date_creation DESC");
         $conversation= $requete->fetchall();
 
         // create_conversation ();
@@ -154,7 +148,7 @@ class Conversation {
 
     public function display_conversation_moderateur () {
 
-        $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs WHERE utilisateurs.id_droit<=1 ORDER BY conversations.date_creation DESC");
+        $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id_droit<=2 INNER JOIN topics ON topics.id=conversations.id_topic ORDER BY conversations.date_creation DESC");
         $conversation= $requete->fetchall();
 
         // create_conversation ();
@@ -196,7 +190,7 @@ class Conversation {
 
     public function display_conversation_admin () {
 
-        $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs WHERE utilisateurs.id_droit<=2 ORDER BY conversations.date_creation DESC");
+        $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id_droit<=3 INNER JOIN topics ON topics.id=conversations.id_topic ORDER BY conversations.date_creation DESC");
         $conversation= $requete->fetchall();
 
         // create_conversation ();

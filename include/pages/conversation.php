@@ -17,7 +17,6 @@
 
 <?php
 
-    $_SESSION['user']['id_droit'] = 0;
 
     include ('../classe/conversation.php'); 
     $conversation = new Conversation (NULL, NULL, NULL, NULL, NULL, NULL); 
@@ -40,6 +39,12 @@
     }
 
     elseif ($_SESSION['user']['id_droit'] == 2) {
+      echo "<pre>";
+      var_dump($_SESSION);
+      echo "</pre>";
+      echo "<pre>";
+      var_dump($_GET);
+      echo "</pre>";
       $conversation->create_conversation();
       $conversation->display_conversation_admin ();
       
