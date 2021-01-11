@@ -71,7 +71,7 @@ public function afficher_topics_exsitants_public()
             
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href="conversations.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
+                                    <div class="media-body ml-3"> <a href="conversation.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
@@ -123,7 +123,7 @@ public function afficher_topics_exsitants_public()
             
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href="conversations.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
+                                    <div class="media-body ml-3"> <a href="conversation.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
@@ -172,7 +172,7 @@ public function afficher_topics_exsitants_public()
             
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href="conversations.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
+                                    <div class="media-body ml-3"> <a href="conversation.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
@@ -219,7 +219,7 @@ public function afficher_topics_exsitants_admin()
             
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href="conversations.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
+                                    <div class="media-body ml-3"> <a href="conversation.php?id=<?php echo $value['id']?>"><?php echo $value['sujet'] ?> </a>
                                         <div class="text-muted small"><?php echo $value['description'] ?></div>
                                     </div>
                                     <div class="text-muted small ml-3">
@@ -255,9 +255,9 @@ public function new_topic()
     {
 
 
-        // echo '<pre>';
-        // print_r($_POST) ;
-        // echo '</pre>';
+        echo '<pre>';
+        print_r($_SESSION) ;
+        echo '</pre>';
         @$sujet = htmlspecialchars($_POST['Sujet']);
         @$Description = htmlspecialchars($_POST['Description']);
 
@@ -265,9 +265,9 @@ public function new_topic()
         $today = date("Y-m-d H:i:s"); 
       
 
-        $req = $this->bdd->prepare('INSERT INTO topics (	id_createur, sujet, description, date_heure_creation, id_visibilite ) VALUES(:id_createur, :sujet, :description, :date_heure_creation, :id_visibilite )');
+        $req = $this->bdd->prepare('INSERT INTO topics (id_createur, sujet, description, date_heure_creation, id_visibilite ) VALUES(:id_createur, :sujet, :description, :date_heure_creation, :id_visibilite )');
         $req->execute(array(
-                        'id_createur' => $_SESSION['id_createur'],      
+                        'id_createur' => $_SESSION['user']['id'],      
                         'sujet' => $sujet, 
                         'description' => $Description, 
                         'date_heure_creation' => $today, 
