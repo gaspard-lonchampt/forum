@@ -255,9 +255,9 @@ public function new_topic()
     {
 
 
-        // echo '<pre>';
-        // print_r($_POST) ;
-        // echo '</pre>';
+        echo '<pre>';
+        print_r($_SESSION) ;
+        echo '</pre>';
         @$sujet = htmlspecialchars($_POST['Sujet']);
         @$Description = htmlspecialchars($_POST['Description']);
 
@@ -265,9 +265,9 @@ public function new_topic()
         $today = date("Y-m-d H:i:s"); 
       
 
-        $req = $this->bdd->prepare('INSERT INTO topics (	id_createur, sujet, description, date_heure_creation, id_visibilite ) VALUES(:id_createur, :sujet, :description, :date_heure_creation, :id_visibilite )');
+        $req = $this->bdd->prepare('INSERT INTO topics (id_createur, sujet, description, date_heure_creation, id_visibilite ) VALUES(:id_createur, :sujet, :description, :date_heure_creation, :id_visibilite )');
         $req->execute(array(
-                        'id_createur' => $_SESSION['id_createur'],      
+                        'id_createur' => $_SESSION['user']['id'],      
                         'sujet' => $sujet, 
                         'description' => $Description, 
                         'date_heure_creation' => $today, 
