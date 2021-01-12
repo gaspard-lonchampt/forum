@@ -1,11 +1,5 @@
 <?php
 
-
-
-// Infos transmises par $_SESSIOn[id_droit], par défaut à 0 (rajouter une condition pour éviter les conflits lorsqu'ils sont connectés ) 
-// id_topic transmis en get
-
-
 class Conversation {
 
     private $id;
@@ -79,8 +73,8 @@ class Conversation {
                             <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['1']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
-                                <div class="media-body ml-3"> <a href=""><?php echo $value['7'] ?></a>
-                                    <div class="text-muted small"><?php echo $value['2'] ?></div>
+                                <div class="media-body ml-3"> <a href=""><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>
+                                    <div class="text-muted small"><?php echo "Créé le&nbsp" . $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
                                     <div>Membre depuis <strong> date en php à insérer</strong></div>
@@ -121,8 +115,8 @@ class Conversation {
                             <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['0']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
-                                <div class="media-body ml-3"> <a href=""><?php echo $value['7'] ?></a>
-                                    <div class="text-muted small"><?php echo $value['2'] ?></div>
+                                <div class="media-body ml-3"> <a href=""><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>
+                                    <div class="text-muted small"><?php echo "Créé le&nbsp" . $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
                                     <div>Membre depuis <strong> date en php à insérer</strong></div>
@@ -163,8 +157,8 @@ class Conversation {
                             <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['0']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
-                                <div class="media-body ml-3"> <a href=""><?php echo $value['7'] ?></a>
-                                    <div class="text-muted small"><?php echo $value['2'] ?></div>
+                                <div class="media-body ml-3"> <a href=""><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>
+                                    <div class="text-muted small"><?php echo "Créé le&nbsp" . $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
                                     <div>Membre depuis <strong> date en php à insérer</strong></div>
