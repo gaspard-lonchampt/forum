@@ -27,6 +27,11 @@ $req = $bdd->prepare(' SELECT * FROM aime WHERE id_user = :id and id_message = :
 $req->execute(array( 'id' => $id_user , 'id_mess' => $id_message ));
 $donnees = $req->fetch(PDO::FETCH_ASSOC);
 
+$req2 = $bdd->query(' SELECT COUNT(*) FROM aime WHERE id_message = 2 and aime = 1');
+$nombre_like = $req2->fetch();
+echo '<pre>';
+print_r($nombre_like);
+echo '</pre>';
 
 if ($donnees == null )
 {
