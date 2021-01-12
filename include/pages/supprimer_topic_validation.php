@@ -27,10 +27,10 @@
 
 
 
-<?php
-    include('../classe/class-topic.php');
-    $topic = new Topic(NULL,NULL, NULL,NULL, NULL);
-    $topic->supprimer_topic();
+<?php //----------------------------------------------A TOI DE METTRE EN DESSOUS TA METHODE POUR SUPPRIMER LES MESSAGES
+    // include('../classe/class-topic.php');
+    // $topic = new Topic(NULL,NULL, NULL,NULL, NULL);
+    // $topic->supprimer_topic();
 ?>
 
 
@@ -44,6 +44,7 @@
     </div>
   </div>
 
+<!-- --------------------------   PENSES A METTRE A JOURS LE LIEN DE REDIRECTION, LA IL POINTE SUR LA PAGE TOPIC -->
   <meta http-equiv="refresh" content="2.5;url=topics.php" />
 
 

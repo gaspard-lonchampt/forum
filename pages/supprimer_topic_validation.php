@@ -1,6 +1,8 @@
 <?php 
  require ('../include/pages/head.php'); 
  require ('../include/pages/naviguation.php'); 
+
+ //----------------------------PENSES A CHANGER LE LIEN DE L'INCLUDE (LE NOM DU FICHIER)
 require ('../include/pages/supprimer_topic_validation.php'); 
 ?>
 
