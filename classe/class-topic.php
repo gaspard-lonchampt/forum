@@ -192,7 +192,12 @@ public function afficher_topics_exsitants_public()
                 <?php
 
             }
-            
+            include('../include/pages/formulaire_creation_topic.php');
+
+            if ( isset($_POST['submit']))
+            {
+             $this->new_topic();
+            }
 
 
     }
