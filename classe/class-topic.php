@@ -53,7 +53,7 @@ public function connection_bdd()
 public function afficher_topics_exsitants_public()
 
     {
-        $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite = 0' );
+        $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite = 0 ORDER BY date_heure_creation desc' );
         $topics = $requete->fetchall();
         
 
@@ -104,7 +104,7 @@ public function afficher_topics_exsitants_public()
 
 
     {
-        $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite <= 1' );
+        $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite <= 1 ORDER BY date_heure_creation desc' );
         $topics = $requete->fetchall();
 
 
@@ -153,7 +153,7 @@ public function afficher_topics_exsitants_public()
     public function afficher_topics_exsitants_moderateur()
 
     {
-        $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite <= 2' );
+        $requete = $this->bdd->query(' SELECT * FROM topics where id_visibilite <= 2 ORDER BY date_heure_creation desc' );
         $topics = $requete->fetchall();
 
 
@@ -192,7 +192,12 @@ public function afficher_topics_exsitants_public()
                 <?php
 
             }
-            
+            include('../include/pages/formulaire_creation_topic.php');
+
+            if ( isset($_POST['submit']))
+            {
+             $this->new_topic();
+            }
 
 
     }
@@ -203,7 +208,7 @@ public function afficher_topics_exsitants_admin()
 
     {
 
-        $requete = $this->bdd->query(' SELECT * FROM topics ' );
+        $requete = $this->bdd->query(' SELECT * FROM topics ORDER BY date_heure_creation desc ' );
         $topics = $requete->fetchall();
 
         foreach ($topics as $key => $value )
@@ -226,7 +231,6 @@ public function afficher_topics_exsitants_admin()
                                         <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
                                         <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                         </br>
-                                        <div ><a class="text-danger" href="supprimer_topic_confirm.php?id=<?php echo $value['id'];?>">supprimer le topic</a></div>
                                     </div>
                                 </div>
                             </div>     

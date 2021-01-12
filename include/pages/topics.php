@@ -27,24 +27,25 @@
     $topic = new Topic(NULL,NULL, NULL,NULL, NULL);
 
 
-   if (!isset($_SESSION['user']['id_droit']))
+   if  (!isset($_SESSION['user']['id_droit']))
     {
         $topic->afficher_topics_exsitants_public();
     }
 
-    elseif (@$_SESSION['user']['id_droit'] == 0)
+    elseif (@$_SESSION['user']['id_droit'] == 1)
     {
         $topic->afficher_topics_exsitants_user_connecte();
     }
 
-    elseif (@$_SESSION['user']['id_droit'] == 1)
+    elseif (@$_SESSION['user']['id_droit'] == 2)
     {
         $topic->afficher_topics_exsitants_moderateur();
     }
 
-    elseif (@$_SESSION['user']['id_droit'] == 2)
+    elseif (@$_SESSION['user']['id_droit'] == 3)
     {
         $topic->afficher_topics_exsitants_admin();
+        
     }
 
     else
