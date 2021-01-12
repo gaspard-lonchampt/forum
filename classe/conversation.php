@@ -21,7 +21,7 @@ class Conversation {
 
     public function db_connexion() {
         try {
-            $db = new PDO("mysql:host=localhost;dbname=forum", 'root', '');
+            $db = new PDO("mysql:host=localhost;dbname=forum", 'root', 'root');
             $db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $db;
         }
@@ -56,7 +56,9 @@ class Conversation {
     
     public function display_conversation_public () {
 
-        $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id_droit=0 INNER JOIN topics ON topics.id=conversations.id_topic ORDER BY conversations.date_creation DESC");
+        @$id_topic = $_GET['id'];
+        $requete = $this->db->prepare("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id=conversations.id_createur INNER JOIN topics ON topics.id=conversations.id_topic WHERE conversations.id_topic=:id_topic ORDER BY conversations.date_creation DESC");
+        $requete->execute(['id_topic' => $id_topic]);
         $conversation= $requete->fetchall();
 
 
@@ -97,7 +99,9 @@ class Conversation {
 
     public function display_conversation_user () {
 
-        $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id_droit<=1 INNER JOIN topics ON topics.id=conversations.id_topic ORDER BY conversations.date_creation DESC");
+        @$id_topic = $_GET['id'];
+        $requete = $this->db->prepare("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id=conversations.id_createur INNER JOIN topics ON topics.id=conversations.id_topic WHERE conversations.id_topic=:id_topic ORDER BY conversations.date_creation DESC");
+        $requete->execute(['id_topic' => $id_topic]);
         $conversation= $requete->fetchall();
 
         // create_conversation ();
@@ -139,7 +143,9 @@ class Conversation {
 
     public function display_conversation_moderateur () {
 
-        $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id_droit<=2 INNER JOIN topics ON topics.id=conversations.id_topic ORDER BY conversations.date_creation DESC");
+        @$id_topic = $_GET['id'];
+        $requete = $this->db->prepare("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id=conversations.id_createur INNER JOIN topics ON topics.id=conversations.id_topic WHERE conversations.id_topic=:id_topic ORDER BY conversations.date_creation DESC");
+        $requete->execute(['id_topic' => $id_topic]);
         $conversation= $requete->fetchall();
 
         // create_conversation ();
@@ -181,7 +187,9 @@ class Conversation {
 
     public function display_conversation_admin () {
 
-        $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id_droit<=3 INNER JOIN topics ON topics.id=conversations.id_topic ORDER BY conversations.date_creation DESC");
+        @$id_topic = $_GET['id'];
+        $requete = $this->db->prepare("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id=conversations.id_createur INNER JOIN topics ON topics.id=conversations.id_topic WHERE conversations.id_topic=:id_topic ORDER BY conversations.date_creation DESC");
+        $requete->execute(['id_topic' => $id_topic]);
         $conversation= $requete->fetchall();
 
         // echo "<pre>";

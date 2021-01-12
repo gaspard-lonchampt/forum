@@ -25,24 +25,23 @@
       $conversation->display_conversation_public();
     }
 
-    elseif ($_SESSION['user']['id_droit'] == 0) {
+    elseif ($_SESSION['user']['id_droit'] == 1) {
       
       $conversation->create_conversation();
       $conversation->display_conversation_user ();
       
     }
 
-    elseif ($_SESSION['user']['id_droit'] == 1) {
+    elseif ($_SESSION['user']['id_droit'] == 2) {
       $conversation->create_conversation();
       $conversation->display_conversation_moderateur ();
      
     }
 
-    elseif ($_SESSION['user']['id_droit'] == 2) {
+    elseif ($_SESSION['user']['id_droit'] == 3) {
     
       $conversation->create_conversation();
       $conversation->display_conversation_admin ();
-
       
     }
 
