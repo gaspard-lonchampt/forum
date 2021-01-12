@@ -41,23 +41,20 @@ class Conversation {
 
         include ('../include/pages/conv_form.php');
 
-        // NE SOIT PAS TROP LARGUE
         if (isset($_POST['conversation_submit'])) {
 
             @$sujet = htmlspecialchars($_POST['conversation_sujet']);
-            @$description = htmlspecialchars($_POST['conversation_description']);
             date_default_timezone_set('Europe/Paris');
             @$date = date("Y-m-d H:i:s"); 
             @$id_topic = $_GET['id'];
-            $test = 2;
+            
 
-            $requete_create = $this->db->prepare("INSERT INTO conversations (id_topic, date_creation, sujet, id_createur, id_visibilite) VALUES(:id_topic, :date_creation, :sujet, :id_createur, :id_visibilite)");      
+            $requete_create = $this->db->prepare("INSERT INTO conversations (id_topic, date_creation, sujet, id_createur, id_visibilite) VALUES(:id_topic, :date_creation, :sujet, :id_createur, (SELECT id_visibilite FROM topics WHERE id = :id_topic))");      
             $requete_create->execute(array(
                 'id_topic' => $id_topic,
                 'date_creation' => $date,
                 'sujet' => $sujet,
-                'id_createur' => $_SESSION['user']['id'],
-                'id_visibilite' => $test));
+                'id_createur' => $_SESSION['user']['id']));
          }
     }
 
@@ -79,11 +76,11 @@ class Conversation {
                     <div class="card mb-4">
                         <div class="card-header">
                             <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                            <div class="media-body ml-3"> <a href=""><?php echo $value['sujet'] ?></a>
+                            <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['1']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
-                                <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ?></a>
-                                    <div class="text-muted small"><?php echo $value['date_creation'] ?></div>
+                                <div class="media-body ml-3"> <a href=""><?php echo $value['7'] ?></a>
+                                    <div class="text-muted small"><?php echo $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
                                     <div>Membre depuis <strong> date en php à insérer</strong></div>
@@ -115,17 +112,17 @@ class Conversation {
 
             ?>
         
-            <div class="container d-block p-5">
+        <div class="container d-block p-5">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
                             <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                            <div class="media-body ml-3"> <a href=""><?php echo $value['sujet'] ?></a>
+                            <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['0']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
-                                <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ?></a>
-                                    <div class="text-muted small"><?php echo $value['date_creation'] ?></div>
+                                <div class="media-body ml-3"> <a href=""><?php echo $value['7'] ?></a>
+                                    <div class="text-muted small"><?php echo $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
                                     <div>Membre depuis <strong> date en php à insérer</strong></div>
@@ -163,11 +160,11 @@ class Conversation {
                     <div class="card mb-4">
                         <div class="card-header">
                             <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                            <div class="media-body ml-3"> <a href=""><?php echo $value['sujet'] ?></a>
+                            <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['0']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
-                                <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ?></a>
-                                    <div class="text-muted small"><?php echo $value['date_creation'] ?></div>
+                                <div class="media-body ml-3"> <a href=""><?php echo $value['7'] ?></a>
+                                    <div class="text-muted small"><?php echo $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
                                     <div>Membre depuis <strong> date en php à insérer</strong></div>
@@ -193,7 +190,9 @@ class Conversation {
         $requete = $this->db->query("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id_droit<=3 INNER JOIN topics ON topics.id=conversations.id_topic ORDER BY conversations.date_creation DESC");
         $conversation= $requete->fetchall();
 
-        // create_conversation ();
+        // echo "<pre>";
+        // var_dump($conversation);
+        // echo "</pre>";
 
         foreach ($conversation as $key => $value ) { 
 
@@ -205,11 +204,11 @@ class Conversation {
                     <div class="card mb-4">
                         <div class="card-header">
                             <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                            <div class="media-body ml-3"> <a href=""><?php echo $value['sujet'] ?></a>
+                            <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['0']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
-                                <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ?></a>
-                                    <div class="text-muted small"><?php echo $value['date_creation'] ?></div>
+                                <div class="media-body ml-3"> <a href=""><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>
+                                    <div class="text-muted small"><?php echo "Créé le&nbsp" . $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
                                     <div>Membre depuis <strong> date en php à insérer</strong></div>
