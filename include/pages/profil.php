@@ -17,7 +17,7 @@
                 if(($_POST['pass'] == $_POST['confirm_pass']) && (preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$#',$_POST['pass'])))
                 {
                     $user = new Utilisateur($login,$password,$nom,$prenom,$age,$id_droit);
-                    $user->connexionBdd("forum", "root","root");
+                    $user->connexionBdd("forum", "root","");
                     $msg = $user->update($id);    
 
                     $infos_utilisateur = $user->getAllinfos(); 

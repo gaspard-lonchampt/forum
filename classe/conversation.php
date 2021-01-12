@@ -23,7 +23,7 @@ class Conversation {
 
     public function db_connexion() {
         try {
-            $db = new PDO("mysql:host=localhost;dbname=forum", 'root', 'root');
+            $db = new PDO("mysql:host=localhost;dbname=forum", 'root', '');
             $db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $db;
         }
@@ -64,7 +64,7 @@ class Conversation {
                 'id_visibilite' => $_SESSION['user']['id_droit'],
                 ));
             
-         }
+        }
     }
 
 
