@@ -17,15 +17,15 @@ class Messages{
         $this->message = $message ; 
         $this->id_like = $id_like ; 
         $this->id_visibilite ; 
-        $this->db = $this->db_connexion(); 
+        $this->bdd = $this->db_connexion(); 
 
     }
 
     public function db_connexion() {
         try {
-            $db = new PDO("mysql:host=localhost;dbname=forum", 'root', '');
-            $db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $db;
+            $bdd = new PDO("mysql:host=localhost;dbname=forum", 'root', '');
+            $bdd -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $bdd;
         }
         
         catch (PDOException $e) {
@@ -35,30 +35,33 @@ class Messages{
 
     public function create_message()
     {
-        
-        $message = htmlspecialchars($_POST['message']) ; 
-        date_default_timezone_set('Europe/Paris');
-        $date = date("Y-m-d H:i:s");
-        
-        $sql = $this->bdd->prepare("SELECT id_visibilite FROM conversations WHERE id = :id 
-        ") ;
-
-        $sql->bindParam(':id', $_GET['id']) ;
-        $sql->execute() ; 
-
-        $result = $sql->fetch(); 
-
-        $requete = $this->bdd->prepare("INSERT INTO messages (id_conversations,id_posteur,date_heure_post,message,id_visibilite)
-                                                    VALUES (:id_conversations, :id_posteur, :date_heure_post, :message, :id_visibilite
-        ") ;
-
-        $requete->bindParam(':id_conversations', $_GET['id']) ; 
-        $requete->bindParam(':id_posteur', $_SESSION['user']['id']) ; 
-        $requete->bindParam(':date_heure_post', $date) ;
-        $requete->bindParam(':message',$message) ;
-        $requete->bindParam(':id_visibilite',$result['id_visibilite']) ;
-
-        $requete->execute(); 
+        if(isset($_POST['message_valider']))
+        {
+            $message = htmlspecialchars($_POST['message']) ; 
+            date_default_timezone_set('Europe/Paris');
+            $date = date("Y-m-d H:i:s");
+            
+            $sql = $this->bdd->prepare("SELECT id_visibilite FROM conversations WHERE id = :id 
+            ") ;
+    
+            $sql->bindParam(':id', $_GET['id']) ;
+            $sql->execute() ; 
+    
+            $result = $sql->fetch(); 
+    
+            $requete = $this->bdd->prepare("INSERT INTO messages (id_conversations,id_posteur,date_heure_post,message,id_visibilite)
+                                                        VALUES (:id_conversations, :id_posteur, :date_heure_post, :message, :id_visibilite
+            ") ;
+    
+            $requete->bindParam(':id_conversations', $_GET['id']) ; 
+            $requete->bindParam(':id_posteur', $_SESSION['user']['id']) ; 
+            $requete->bindParam(':date_heure_post', $date) ;
+            $requete->bindParam(':message',$message) ;
+            $requete->bindParam(':id_visibilite',$result['id_visibilite']) ;
+    
+            $requete->execute(); 
+            
+        }
 
     }
 
@@ -85,7 +88,7 @@ class Messages{
 
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ; ?></a>
+                                    <div class="media-body ml-3"> <a href=""><?= $value['login'] ; ?></a>
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
                                     <div class="text-muted small ml-3">
@@ -96,7 +99,7 @@ class Messages{
                             </div>
 
                             <div class="card-body">
-                                <p> <?php echo $value['message'] ; ?> </p>
+                                <p> <?= $value['message'] ; ?> </p>
                                 
                             </div>
                             <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
@@ -111,21 +114,24 @@ class Messages{
         <?php
         }
         
-        include ('../include/pages/conv_form.php');
+        include ('../include/pages/message_form.php');
+
     }
 
     public function afficheMessagesConnect()
     {
-        $requete = $this->bdd->prepare("SELECT messages,date_heure_post,login 
+        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
-                                                        WHERE messages.id_posteur = utilisateurs.id 
-                                                            AND messages.id_visibilite = 1
+                                                        ON messages.id_posteur = utilisateurs.id 
+                                                            INNER JOIN conversations
+                                                                ON conversations.id = messages.id
+                                                                    WHERE messages.id_visibilite = 1
         ");
 
         $requete->execute(); 
 
-        $result = $sql->fetchAll();
+        $result = $requete->fetchAll();
 
         foreach($result as $key => $value)
         {
@@ -163,12 +169,12 @@ class Messages{
         <?php
         }
         
-        include ('../include/pages/conv_form.php');
+        include ('../include/pages/message_form.php');
     }
 
     public function afficheMessagesModo()
     {
-        $requete = $this->bdd->prepare("SELECT messages,date_heure_post,login 
+        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
                                                         WHERE messages.id_posteur = utilisateurs.id 
@@ -177,7 +183,7 @@ class Messages{
 
         $requete->execute(); 
 
-        $result = $sql->fetchAll();
+        $result = $requete->fetchAll();
 
         foreach($result as $key => $value)
         {
@@ -215,12 +221,14 @@ class Messages{
         <?php
         }
         
-        include ('../include/pages/conv_form.php');
+        include ('../include/pages/message_form.php');
+
+        
     }
 
     public function afficheMessagesAdmin()
     {
-        $requete = $this->bdd->prepare("SELECT messages,date_heure_post,login 
+        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
                                                         WHERE messages.id_posteur = utilisateurs.id 
@@ -229,7 +237,7 @@ class Messages{
 
         $requete->execute(); 
 
-        $result = $sql->fetchAll();
+        $result = $requete->fetchAll();
 
         foreach($result as $key => $value)
         {
@@ -267,7 +275,7 @@ class Messages{
         <?php
         }
         
-        include ('../include/pages/conv_form.php');
+        include ('../include/pages/message_form.php');
     }
 
 

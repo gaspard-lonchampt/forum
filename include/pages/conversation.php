@@ -49,10 +49,6 @@
       echo "C'est pas une science exacte, on est à une vache près";
     }
 
-    
-      
-
-      
 
 
 ?>

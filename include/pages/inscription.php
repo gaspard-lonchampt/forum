@@ -15,8 +15,8 @@ if(isset($_POST['valider']))
             {
                 if($age > 1 && $age < 120)
                 {
-                    $user = new Utilisateur($login,$password,$nom,$prenom,$age,0);
-                    $user->connexionBdd("forum", "root","root");
+                    $user = new Utilisateur($login,$password,$nom,$prenom,$age,1);
+                    $user->connexionBdd("forum", "root","");
                     $user->inscription();    
                     
                     $error_login = $user->inscription();    

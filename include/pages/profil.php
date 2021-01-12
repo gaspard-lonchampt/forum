@@ -37,7 +37,7 @@
             }
         }
 
-        if($_SESSION['user']['id_droit'] == 2)
+        if($_SESSION['user']['id_droit'] == 3)
         {
             $link_admin = '<a href="../pages/modif_droit.php"> Modifier les droits des utilisateurs </a>' ; 
         }
