@@ -48,16 +48,8 @@ class Conversation {
                 'id_topic' => $id_topic,
                 'date_creation' => $date,
                 'sujet' => $sujet,
-<<<<<<< HEAD
                 'id_createur' => $_SESSION['user']['id']));
          }
-=======
-                'id_createur' => $_SESSION['user']['id'],
-                'id_visibilite' => $_SESSION['user']['id_droit'],
-                ));
-            
-        }
->>>>>>> branch_bapt_3
     }
 
 
