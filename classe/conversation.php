@@ -21,7 +21,7 @@ class Conversation {
 
     public function db_connexion() {
         try {
-            $db = new PDO("mysql:host=localhost;dbname=forum", 'root', 'root');
+            $db = new PDO("mysql:host=localhost;dbname=forum", 'root', '');
             $db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $db;
         }
@@ -48,8 +48,16 @@ class Conversation {
                 'id_topic' => $id_topic,
                 'date_creation' => $date,
                 'sujet' => $sujet,
+<<<<<<< HEAD
                 'id_createur' => $_SESSION['user']['id']));
          }
+=======
+                'id_createur' => $_SESSION['user']['id'],
+                'id_visibilite' => $_SESSION['user']['id_droit'],
+                ));
+            
+        }
+>>>>>>> branch_bapt_3
     }
 
 
