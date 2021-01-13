@@ -81,7 +81,7 @@ class Messages{
                                                                                 AND messages.id_visibilite = 0
                                                                                     ORDER BY date_heure_post DESC
         ");
-        
+
         $requete->bindParam(':id', $_GET['id']) ;
         $requete->execute(); 
 
@@ -139,7 +139,8 @@ class Messages{
                                                                                 AND messages.id_visibilite <= 1
                                                                                     ORDER BY date_heure_post DESC
         ");
-
+        
+        $requete->bindParam(':id', $_GET['id']) ;
         $requete->execute(); 
 
         $result = $requete->fetchAll();
