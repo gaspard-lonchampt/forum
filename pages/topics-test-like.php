@@ -117,7 +117,7 @@ if ($recherche_like['aime'] == 1 )
                         <div class="d-flex h-25">
                             <a href="supprimer_like.php"  title="j'aime"><img class="img_like" src="../img/like_checked.png" alt=""></a>
                             <p><?php echo ' '. $nombre_like[0]; ?> </p>
-                            <a href=""  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
+                            <a href="supprimer_like_ajout_dislike.php"  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
                             <p><?php echo ' '. $nombre_dislike[0]; ?></p>
                         </div>
                         
@@ -139,6 +139,7 @@ if ($recherche_like['aime'] == 1 )
 $req = $bdd->prepare(' SELECT * FROM aime WHERE id_user = :id and id_message = :id_mess ');
 $req->execute(array( 'id' => $id_user , 'id_mess' => $id_message ));
 $recherche_dislike = $req->fetch(PDO::FETCH_ASSOC);
+$_SESSION['dislike']=$recherche_dislike;
 // echo '<pre>';
 // var_dump($recherche_dislike);
 // echo '</pre>';
@@ -164,7 +165,7 @@ if ($recherche_dislike['pas_aime'] == 1 )
                         <div class="d-flex h-25">
                             <a href=""  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
                             <p><?php echo ' '. $nombre_like[0]; ?> </p>
-                            <a href=""  title="je n'aime pas"><img class="img_like" src="../img/dislike_checked.png" alt=""></a>
+                            <a href="supprimer_like.php"  title="je n'aime pas"><img class="img_like" src="../img/dislike_checked.png" alt=""></a>
                             <p><?php echo ' '. $nombre_dislike[0]; ?></p>
                         </div>
                         
