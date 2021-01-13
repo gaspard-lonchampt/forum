@@ -12,6 +12,7 @@ public $id_user;
 public $aime;
 public $pas_aime;
 
+
 public function __construc($id, $id_message, $id_user, $aime, $pas_aime)
 {
 $this->id = $id;
@@ -142,7 +143,34 @@ public function affiche_bouton_avec_dislike($variable_1, $variable_2)
 
 
 
+public function supprimer_dislike_ajout_like($a)
+    {
+        $bdd = $this->connection_bdd();
+        
+        $req = $bdd->prepare('DELETE FROM aime WHERE id = :id_like ');
+                                    $req->execute(array(
+                                'id_like' => $a['id'],                                                                         
+                                
+                                                    ));
+                    
+                            
+        $id_message= $a['id_message'];
+        $id_user = $a['id_user'];
+        $aime = 1;
+        $pas_aime = 0;
 
+        $req = $bdd->prepare('INSERT INTO aime(id_message, id_user,aime,pas_aime) VALUES(:id_message, :id_user, :aime, :pas_aime)');
+        $req->execute(array(
+            'id_message' => $id_message,                                                                         
+            'id_user' => $id_user,
+            'aime' => $aime,
+            'pas_aime' => $pas_aime,
+                    ));
+        $bdd = null;
+
+
+        header('Location: topics-test-like.php');//redirection
+    }
 
 
 

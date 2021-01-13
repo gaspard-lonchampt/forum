@@ -14,7 +14,7 @@ require ('../classe/class-like-dislike.php');
 $like = new Like_dislike(null,null,null,null,null);
 
 
-$id_user = 1;
+$id_user = 1; //correspond à l'id de l'utilisateur connecté, $_session
 $id_message = 10;
 
 // $nombre_like = $like->compte_nombre_like($id_message);
