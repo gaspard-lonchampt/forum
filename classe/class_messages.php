@@ -42,18 +42,22 @@ class Messages{
             $date = date("Y-m-d H:i:s");
             
             $sql = $this->bdd->prepare("SELECT id_visibilite FROM conversations WHERE id = :id 
-            ") ;
+            ") ; // on recup l'id_visiblite de la conv qui dépend du get 
     
             $sql->bindParam(':id', $_GET['id']) ;
             $sql->execute() ; 
     
             $result = $sql->fetch(); 
+            echo $_GET['id'] ; 
+
+            var_dump($result) ;
     
-            $requete = $this->bdd->prepare("INSERT INTO messages (id_conversations,id_posteur,date_heure_post,message,id_visibilite)
-                                                        VALUES (:id_conversations, :id_posteur, :date_heure_post, :message, :id_visibilite
+            $requete = $this->bdd->prepare("INSERT INTO messages (id_conversations, id_topic, id_posteur, date_heure_post, message, id_visibilite)
+                                                        VALUES (:id_conversations, :id_topic, :id_posteur, :date_heure_post, :message, :id_visibilite)
             ") ;
     
             $requete->bindParam(':id_conversations', $_GET['id']) ; 
+            $requete->bindParam(':id_topic', $_GET['id']) ; 
             $requete->bindParam(':id_posteur', $_SESSION['user']['id']) ; 
             $requete->bindParam(':date_heure_post', $date) ;
             $requete->bindParam(':message',$message) ;
@@ -70,10 +74,15 @@ class Messages{
         $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
-                                                        WHERE messages.id_posteur = utilisateurs.id 
-                                                            AND messages.id_visibilite = 0
+                                                        ON messages.id_posteur = utilisateurs.id 
+                                                            INNER JOIN conversations 
+                                                                    ON conversations.id = messages.id_conversations
+                                                                        WHERE conversations.id = :id
+                                                                                AND messages.id_visibilite = 0
+                                                                                    ORDER BY date_heure_post DESC
         ");
 
+        $requete->bindParam(':id', $_GET['id']) ;
         $requete->execute(); 
 
         $result = $requete->fetchAll();
@@ -92,7 +101,7 @@ class Messages{
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Membre depuis <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
+                                        <div> Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
                                         <div><strong>200 (nombre à insérer en php)</strong> de post</div>
                                     </div>
                                 </div>
@@ -124,11 +133,14 @@ class Messages{
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
                                                         ON messages.id_posteur = utilisateurs.id 
-                                                            INNER JOIN conversations
-                                                                ON conversations.id = messages.id
-                                                                    WHERE messages.id_visibilite = 1
+                                                            INNER JOIN conversations 
+                                                                    ON conversations.id = messages.id_conversations
+                                                                        WHERE conversations.id = :id
+                                                                                AND messages.id_visibilite <= 1
+                                                                                    ORDER BY date_heure_post DESC
         ");
-
+        
+        $requete->bindParam(':id', $_GET['id']) ;
         $requete->execute(); 
 
         $result = $requete->fetchAll();
@@ -147,7 +159,7 @@ class Messages{
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Membre depuis <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
+                                        <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
                                         <div><strong>200 (nombre à insérer en php)</strong> de post</div>
                                     </div>
                                 </div>
@@ -177,10 +189,15 @@ class Messages{
         $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
-                                                        WHERE messages.id_posteur = utilisateurs.id 
-                                                            AND messages.id_visibilite = 2
+                                                        ON messages.id_posteur = utilisateurs.id 
+                                                            INNER JOIN conversations 
+                                                                    ON conversations.id = messages.id_conversations
+                                                                        WHERE conversations.id = :id
+                                                                                AND messages.id_visibilite <= 2
+                                                                                    ORDER BY date_heure_post DESC
         ");
 
+        $requete->bindParam(':id', $_GET['id']) ; 
         $requete->execute(); 
 
         $result = $requete->fetchAll();
@@ -199,7 +216,7 @@ class Messages{
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Membre depuis <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
+                                        <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
                                         <div><strong>200 (nombre à insérer en php)</strong> de post</div>
                                     </div>
                                 </div>
@@ -231,10 +248,15 @@ class Messages{
         $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
-                                                        WHERE messages.id_posteur = utilisateurs.id 
-                                                            AND messages.id_visibilite = 3
+                                                        ON messages.id_posteur = utilisateurs.id 
+                                                            INNER JOIN conversations 
+                                                                    ON conversations.id = messages.id_conversations
+                                                                        WHERE conversations.id = :id
+                                                                                AND messages.id_visibilite <= 3
+                                                                                    ORDER BY date_heure_post DESC
         ");
-
+      
+        $requete->bindParam(':id', $_GET['id']) ; 
         $requete->execute(); 
 
         $result = $requete->fetchAll();
@@ -253,7 +275,7 @@ class Messages{
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Membre depuis <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
+                                        <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
                                         <div><strong>200 (nombre à insérer en php)</strong> de post</div>
                                     </div>
                                 </div>
@@ -265,7 +287,7 @@ class Messages{
                             </div>
                             <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
                                 <div class="px-4 pt-3"> <a href="" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true"> <i class="fa fa-heart text-danger"></i>&nbsp; <span class="align-middle">445</span> </a> <span class="text-muted d-inline-flex align-items-center align-middle ml-4"> <i class="fa fa-eye text-muted fsize-3"></i>&nbsp; <span class="align-middle">14532</span> </span> </div>
-                                <div class="px-4 pt-3"> <button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Répondre</button> </div>
+                                <div class="px-4 pt-3"> <a href="messages.php#reponse"><button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Répondre</button></a> </div>
                             </div>
                         </div>
                     </div>
