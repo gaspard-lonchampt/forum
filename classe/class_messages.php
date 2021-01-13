@@ -101,7 +101,7 @@ class Messages{
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Membre depuis <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
+                                        <div> Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
                                         <div><strong>200 (nombre à insérer en php)</strong> de post</div>
                                     </div>
                                 </div>
@@ -159,7 +159,7 @@ class Messages{
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Membre depuis <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
+                                        <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
                                         <div><strong>200 (nombre à insérer en php)</strong> de post</div>
                                     </div>
                                 </div>
@@ -216,7 +216,7 @@ class Messages{
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Membre depuis <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
+                                        <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
                                         <div><strong>200 (nombre à insérer en php)</strong> de post</div>
                                     </div>
                                 </div>
@@ -275,7 +275,7 @@ class Messages{
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Membre depuis <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
+                                        <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
                                         <div><strong>200 (nombre à insérer en php)</strong> de post</div>
                                     </div>
                                 </div>
@@ -287,7 +287,7 @@ class Messages{
                             </div>
                             <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
                                 <div class="px-4 pt-3"> <a href="" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true"> <i class="fa fa-heart text-danger"></i>&nbsp; <span class="align-middle">445</span> </a> <span class="text-muted d-inline-flex align-items-center align-middle ml-4"> <i class="fa fa-eye text-muted fsize-3"></i>&nbsp; <span class="align-middle">14532</span> </span> </div>
-                                <div class="px-4 pt-3"> <button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Répondre</button> </div>
+                                <div class="px-4 pt-3"> <a href="messages.php#reponse"><button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Répondre</button></a> </div>
                             </div>
                         </div>
                     </div>
