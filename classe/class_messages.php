@@ -42,18 +42,22 @@ class Messages{
             $date = date("Y-m-d H:i:s");
             
             $sql = $this->bdd->prepare("SELECT id_visibilite FROM conversations WHERE id = :id 
-            ") ;
+            ") ; // on recup l'id_visiblite de la conv qui dépend du get 
     
             $sql->bindParam(':id', $_GET['id']) ;
             $sql->execute() ; 
     
             $result = $sql->fetch(); 
+            echo $_GET['id'] ; 
+
+            var_dump($result) ;
     
-            $requete = $this->bdd->prepare("INSERT INTO messages (id_conversations,id_posteur,date_heure_post,message,id_visibilite)
-                                                        VALUES (:id_conversations, :id_posteur, :date_heure_post, :message, :id_visibilite
+            $requete = $this->bdd->prepare("INSERT INTO messages (id_conversations, id_topic, id_posteur, date_heure_post, message, id_visibilite)
+                                                        VALUES (:id_conversations, :id_topic, :id_posteur, :date_heure_post, :message, :id_visibilite)
             ") ;
     
             $requete->bindParam(':id_conversations', $_GET['id']) ; 
+            $requete->bindParam(':id_topic', $_GET['id']) ; 
             $requete->bindParam(':id_posteur', $_SESSION['user']['id']) ; 
             $requete->bindParam(':date_heure_post', $date) ;
             $requete->bindParam(':message',$message) ;
@@ -67,16 +71,21 @@ class Messages{
 
     public function afficheMessagesPublic()
     {
-        $requete = $this->bdd->prepare("SELECT messages,date_heure_post,login 
+        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
-                                                        WHERE messages.id_posteur = utilisateurs.id 
-                                                            AND messages.id_visibilite = 0
+                                                        ON messages.id_posteur = utilisateurs.id 
+                                                            INNER JOIN conversations 
+                                                                    ON conversations.id = messages.id_conversations
+                                                                        WHERE conversations.id = :id
+                                                                                AND messages.id_visibilite = 0
+                                                                                    ORDER BY date_heure_post DESC
         ");
-
+        
+        $requete->bindParam(':id', $_GET['id']) ;
         $requete->execute(); 
 
-        $result = $sql->fetchAll();
+        $result = $requete->fetchAll();
 
         foreach($result as $key => $value)
         {
@@ -124,9 +133,11 @@ class Messages{
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
                                                         ON messages.id_posteur = utilisateurs.id 
-                                                            INNER JOIN conversations
-                                                                ON conversations.id = messages.id
-                                                                    WHERE messages.id_visibilite = 1
+                                                            INNER JOIN conversations 
+                                                                    ON conversations.id = messages.id_conversations
+                                                                        WHERE conversations.id = :id
+                                                                                AND messages.id_visibilite <= 1
+                                                                                    ORDER BY date_heure_post DESC
         ");
 
         $requete->execute(); 
@@ -177,10 +188,15 @@ class Messages{
         $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
-                                                        WHERE messages.id_posteur = utilisateurs.id 
-                                                            AND messages.id_visibilite = 2
+                                                        ON messages.id_posteur = utilisateurs.id 
+                                                            INNER JOIN conversations 
+                                                                    ON conversations.id = messages.id_conversations
+                                                                        WHERE conversations.id = :id
+                                                                                AND messages.id_visibilite <= 2
+                                                                                    ORDER BY date_heure_post DESC
         ");
 
+        $requete->bindParam(':id', $_GET['id']) ; 
         $requete->execute(); 
 
         $result = $requete->fetchAll();
@@ -231,10 +247,15 @@ class Messages{
         $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
-                                                        WHERE messages.id_posteur = utilisateurs.id 
-                                                            AND messages.id_visibilite = 3
+                                                        ON messages.id_posteur = utilisateurs.id 
+                                                            INNER JOIN conversations 
+                                                                    ON conversations.id = messages.id_conversations
+                                                                        WHERE conversations.id = :id
+                                                                                AND messages.id_visibilite <= 3
+                                                                                    ORDER BY date_heure_post DESC
         ");
-
+      
+        $requete->bindParam(':id', $_GET['id']) ; 
         $requete->execute(); 
 
         $result = $requete->fetchAll();
