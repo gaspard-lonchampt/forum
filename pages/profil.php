@@ -1,4 +1,7 @@
 <?php
+
+
+// rajouter redirection en fonction de l'index
 session_start();
 
 if(!isset($_SESSION['user']))

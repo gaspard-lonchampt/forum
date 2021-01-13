@@ -23,7 +23,7 @@ class Messages{
 
     public function db_connexion() {
         try {
-            $bdd = new PDO("mysql:host=localhost;dbname=forum", 'root', '');
+            $bdd = new PDO("mysql:host=localhost;dbname=forum", 'root', 'root');
             $bdd -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $bdd;
         }
@@ -67,7 +67,7 @@ class Messages{
 
     public function afficheMessagesPublic()
     {
-        $requete = $this->bdd->prepare("SELECT messages,date_heure_post,login 
+        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
                                                         WHERE messages.id_posteur = utilisateurs.id 
@@ -76,7 +76,7 @@ class Messages{
 
         $requete->execute(); 
 
-        $result = $sql->fetchAll();
+        $result = $requete->fetchAll();
 
         foreach($result as $key => $value)
         {

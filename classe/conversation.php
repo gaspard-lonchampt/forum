@@ -57,7 +57,7 @@ class Conversation {
     public function display_conversation_public () {
 
         @$id_topic = $_GET['id'];
-        $requete = $this->db->prepare("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id=conversations.id_createur INNER JOIN topics ON topics.id=conversations.id_topic WHERE conversations.id_topic=:id_topic ORDER BY conversations.date_creation DESC");
+        $requete = $this->db->prepare("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id=conversations.id_createur INNER JOIN topics ON topics.id=conversations.id_topic WHERE conversations.id_topic=:id_topic AND conversations.id_visibilite = 0 ORDER BY conversations.date_creation DESC");
         $requete->execute(['id_topic' => $id_topic]);
         $conversation= $requete->fetchall();
 
@@ -100,7 +100,7 @@ class Conversation {
     public function display_conversation_user () {
 
         @$id_topic = $_GET['id'];
-        $requete = $this->db->prepare("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id=conversations.id_createur INNER JOIN topics ON topics.id=conversations.id_topic WHERE conversations.id_topic=:id_topic ORDER BY conversations.date_creation DESC");
+        $requete = $this->db->prepare("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id=conversations.id_createur INNER JOIN topics ON topics.id=conversations.id_topic WHERE conversations.id_topic=:id_topic AND conversations.id_visibilite <= 1 ORDER BY conversations.date_creation DESC");
         $requete->execute(['id_topic' => $id_topic]);
         $conversation= $requete->fetchall();
 
@@ -144,7 +144,7 @@ class Conversation {
     public function display_conversation_moderateur () {
 
         @$id_topic = $_GET['id'];
-        $requete = $this->db->prepare("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id=conversations.id_createur INNER JOIN topics ON topics.id=conversations.id_topic WHERE conversations.id_topic=:id_topic ORDER BY conversations.date_creation DESC");
+        $requete = $this->db->prepare("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id=conversations.id_createur INNER JOIN topics ON topics.id=conversations.id_topic WHERE conversations.id_topic=:id_topic AND conversations.id_visibilite <= 2 ORDER BY conversations.date_creation DESC");
         $requete->execute(['id_topic' => $id_topic]);
         $conversation= $requete->fetchall();
 
@@ -188,7 +188,7 @@ class Conversation {
     public function display_conversation_admin () {
 
         @$id_topic = $_GET['id'];
-        $requete = $this->db->prepare("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id=conversations.id_createur INNER JOIN topics ON topics.id=conversations.id_topic WHERE conversations.id_topic=:id_topic ORDER BY conversations.date_creation DESC");
+        $requete = $this->db->prepare("SELECT * FROM conversations INNER JOIN utilisateurs ON utilisateurs.id=conversations.id_createur INNER JOIN topics ON topics.id=conversations.id_topic WHERE conversations.id_topic=:id_topic AND conversations.id_visibilite <= 3 ORDER BY conversations.date_creation DESC");
         $requete->execute(['id_topic' => $id_topic]);
         $conversation= $requete->fetchall();
 

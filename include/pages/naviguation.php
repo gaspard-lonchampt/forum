@@ -78,6 +78,15 @@
                     echo 'pages/profil.php';
                 }?>">Profil</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php 
+                if (!isset($repere)) {
+                    echo '../pages/display_profil.php';
+                }
+                else {
+                    echo 'pages/display_profil.php';
+                }?>">Voir les profils des membres</a>
+          </li>
           <?php
           }
           ?>
