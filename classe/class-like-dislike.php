@@ -42,12 +42,16 @@ public function compte_nombre_dislike($variable)
         return $req2->fetch();
     }
 
-public function affiche_bouton_sans_like_ni_dislike($variable_1, $variable_2, $variable_3,$variable_4)
+public function affiche_bouton_sans_like_ni_dislike($variable_1, $variable_2)
     {
         $bdd = $this->connection_bdd();
         $req = $bdd->prepare(' SELECT * FROM aime WHERE id_user = :id and id_message = :id_mess ');
         $req->execute(array( 'id' => $variable_1 , 'id_mess' => $variable_2 ));
         $resultat_null = $req->fetch(PDO::FETCH_ASSOC);
+
+        $nombre_like = $this->compte_nombre_like($variable_2);
+
+        $nombre_dislike = $this->compte_nombre_dislike($variable_2);
 
         if ($resultat_null == null )
         {
@@ -58,13 +62,94 @@ public function affiche_bouton_sans_like_ni_dislike($variable_1, $variable_2, $v
 
                                 <div class="d-flex h-25">
                                     <a href="ajout_like.php"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
-                                    <p><?php echo ' '. $variable_3[0]; ?> </p>
+                                    <p><?php echo ' '. $nombre_like[0]; ?> </p>
                                     <a href="ajout_dislike.php"  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
-                                    <p><?php echo ' '. $variable_4[0]; ?></p>
+                                    <p><?php echo ' '. $nombre_dislike[0]; ?></p>
                                 </div>
            
         <?php
         }
     }
+
+
+
+public function affiche_bouton_avec_like($variable_1, $variable_2)
+    {
+        $bdd = $this->connection_bdd();
+        $req = $bdd->prepare(' SELECT * FROM aime WHERE id_user = :id and id_message = :id_mess ');
+        $req->execute(array( 'id' => $variable_1 , 'id_mess' => $variable_2 ));
+        $recherche_like = $req->fetch(PDO::FETCH_ASSOC);
+        
+
+        $nombre_like = $this->compte_nombre_like($variable_2);
+
+        $nombre_dislike = $this->compte_nombre_dislike($variable_2);
+
+        if (@$recherche_like['aime'] == 1 )
+        {
+        
+        ?>
+        </br></br></br></br></br></br></br></br></br>
+
+        
+                                <div class="d-flex h-25">
+                                    <a href="supprimer_like_&_dislike.php"  title="j'aime"><img class="img_like" src="../img/like_checked.png" alt=""></a>
+                                    <p><?php echo ' '. $nombre_like[0]; ?> </p>
+                                    <a href="supprimer_like_ajout_dislike.php"  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
+                                    <p><?php echo ' '. $nombre_dislike[0]; ?></p>
+                                </div>
+                                
+ 
+        <?php
+        }
+        return $_SESSION['like']=$recherche_like;
+    }   
+
+
+
+
+public function affiche_bouton_avec_dislike($variable_1, $variable_2)
+    {
+        $bdd = $this->connection_bdd();
+        $req = $bdd->prepare(' SELECT * FROM aime WHERE id_user = :id and id_message = :id_mess ');
+        $req->execute(array( 'id' => $variable_1 , 'id_mess' => $variable_2 ));
+        $recherche_dislike = $req->fetch(PDO::FETCH_ASSOC);
+        
+
+        $nombre_like = $this->compte_nombre_like($variable_2);
+
+        $nombre_dislike = $this->compte_nombre_dislike($variable_2);
+
+        if (@$recherche_dislike['pas_aime'] == 1 )
+        {
+        
+        ?>
+        </br></br></br></br></br></br></br></br></br>
+
+        
+                    <div class="d-flex h-25">
+                            <a href="supprimer_dislike_ajout_like.php"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
+                            <p><?php echo ' '. $nombre_like[0]; ?> </p>
+                            <a href="supprimer_like_&_dislike.php"  title="je n'aime pas"><img class="img_like" src="../img/dislike_checked.png" alt=""></a>
+                            <p><?php echo ' '. $nombre_dislike[0]; ?></p>
+                        </div>
+                                
+ 
+        <?php
+        }
+        return $_SESSION['dislike']=$recherche_dislike;;
+    }   
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
