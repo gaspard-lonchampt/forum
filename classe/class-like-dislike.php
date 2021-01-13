@@ -141,17 +141,26 @@ public function affiche_bouton_avec_dislike($variable_1, $variable_2)
         return $_SESSION['dislike']=$recherche_dislike;;
     }   
 
+public function Supprimer_like_et_dislike($a)
+    {
+
+        $bdd = $this->connection_bdd();
+        $req = $bdd->prepare('DELETE FROM aime WHERE id = :id_like ');
+        $req->execute(array('id_like' => $a['id']));
+        $bdd = null;
+
+        header('Location: topics-test-like.php');//redirection
+
+    }
 
 
+    
 public function supprimer_dislike_ajout_like($a)
     {
         $bdd = $this->connection_bdd();
-        
+
         $req = $bdd->prepare('DELETE FROM aime WHERE id = :id_like ');
-                                    $req->execute(array(
-                                'id_like' => $a['id'],                                                                         
-                                
-                                                    ));
+        $req->execute(array('id_like' => $a['id']));
                     
                             
         $id_message= $a['id_message'];
@@ -173,7 +182,28 @@ public function supprimer_dislike_ajout_like($a)
     }
 
 
+public function supprimer_like_ajout_dislike($a)
+    {
+        $bdd = $this->connection_bdd();
+        $req = $bdd->prepare('DELETE FROM aime WHERE id = :id_like ');
+        $req->execute(array('id_like' => $a['id'] ));
+                
+        $id_message= $a['id_message'];
+        $id_user = $a['id_user'];
+        $aime = 0;
+        $pas_aime = 1;
 
+        $req = $bdd->prepare('INSERT INTO aime(id_message, id_user,aime,pas_aime) VALUES(:id_message, :id_user, :aime, :pas_aime)');
+        $req->execute(array(
+            'id_message' => $id_message,                                                                         
+            'id_user' => $id_user,
+            'aime' => $aime,
+            'pas_aime' => $pas_aime,
+                    ));
+        $bdd = null;
+
+        header('Location: topics-test-like.php');//redirection
+    }
 
 
 

@@ -1,42 +1,16 @@
 <?php
 session_start();
 
-try 
-{
-    $bdd = new PDO('mysql:host=localhost;dbname=forum;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-}
-catch (Exception $e)
-{
-    die('Erreur : ' . $e->getMessage());
-}
+
+require ('../classe/class-like-dislike.php'); 
 
 
-$_SESSION['like']['id'];
+$like = new Like_dislike(null,null,null,null,null);
 
-$req = $bdd->prepare('DELETE FROM aime WHERE id = :id_like ');
-                            $req->execute(array(
-                           'id_like' => $_SESSION['like']['id'],                                                                         
-                           
-                                              ));
-              
-                     
-$id_message= 10;
-$id_user = 1;
-$aime = 0;
-$pas_aime = 1;
-
-$req = $bdd->prepare('INSERT INTO aime(id_message, id_user,aime,pas_aime) VALUES(:id_message, :id_user, :aime, :pas_aime)');
-$req->execute(array(
-     'id_message' => $id_message,                                                                         
-     'id_user' => $id_user,
-     'aime' => $aime,
-     'pas_aime' => $pas_aime,
-              ));
-$bdd = null;
+$like_et_dislike = $_SESSION['dislike'];
 
 
-header('Location: topics-test-like.php');//redirection
-exit();
+$like->supprimer_like_ajout_dislike($like_et_dislike);
 
 
 ?>

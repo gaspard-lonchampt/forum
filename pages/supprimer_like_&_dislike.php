@@ -1,29 +1,19 @@
 <?php
 session_start();
 
-try 
-{
-    $bdd = new PDO('mysql:host=localhost;dbname=forum;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-}
-catch (Exception $e)
-{
-    die('Erreur : ' . $e->getMessage());
-}
 
 
-$_SESSION['like']['id'];
 
- $req = $bdd->prepare('DELETE FROM aime WHERE id = :id_like ');
-                            $req->execute(array(
-                           'id_like' => $_SESSION['like']['id'],                                                                         
-                    
-                           
-                                              ));
-                       $bdd = null;
-                     
+require ('../classe/class-like-dislike.php'); 
 
-                      header('Location: topics-test-like.php');//redirection
-                      exit();
+
+$like = new Like_dislike(null,null,null,null,null);
+
+$like_et_dislike = $_SESSION['like'];
+
+
+$like->Supprimer_like_et_dislike($like_et_dislike);
+
 
 
 ?>
