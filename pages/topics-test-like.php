@@ -163,7 +163,7 @@ if ($recherche_dislike['pas_aime'] == 1 )
                         <div>Nombre de messages : <strong>test</strong></div>
 
                         <div class="d-flex h-25">
-                            <a href=""  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
+                            <a href="supprimer_dislike_ajout_like.php"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
                             <p><?php echo ' '. $nombre_like[0]; ?> </p>
                             <a href="supprimer_like.php"  title="je n'aime pas"><img class="img_like" src="../img/dislike_checked.png" alt=""></a>
                             <p><?php echo ' '. $nombre_dislike[0]; ?></p>
