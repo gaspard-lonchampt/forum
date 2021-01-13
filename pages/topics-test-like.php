@@ -15,8 +15,8 @@ catch (Exception $e)
 }
 
 
-$id_user = 2;
-$id_message = 5;
+$id_user = 1;
+$id_message = 10;
 
 // $req = $bdd->query('SELECT * FROM aime');
 // echo '<pre>';
@@ -25,11 +25,13 @@ $id_message = 5;
 
 
 
-$req2 = $bdd->query(' SELECT COUNT(*) FROM aime WHERE id_message = 2 and aime = 1');// recherche nombre like
+$req2 = $bdd->prepare(' SELECT COUNT(*) FROM aime WHERE id_message = :id_message and aime = 1');// recherche nombre like
+$req2->execute(array( 'id_message' => $id_message , ));
 $nombre_like = $req2->fetch();
 
 
-$req2 = $bdd->query(' SELECT COUNT(*) FROM aime WHERE id_message = 2 and pas_aime = 1');// recherche nombre dislike
+$req2 = $bdd->prepare(' SELECT COUNT(*) FROM aime WHERE id_message = :id_message and pas_aime = 1');// recherche nombre disllike
+$req2->execute(array( 'id_message' => $id_message , ));
 $nombre_dislike = $req2->fetch();
 
 
@@ -38,6 +40,8 @@ $nombre_dislike = $req2->fetch();
 
 
 
+
+// affichage si pas de LIKE ni de DISLIKE
 $req = $bdd->prepare(' SELECT * FROM aime WHERE id_user = :id and id_message = :id_mess ');
 $req->execute(array( 'id' => $id_user , 'id_mess' => $id_message ));
 $resultat_null = $req->fetch(PDO::FETCH_ASSOC);
@@ -62,9 +66,9 @@ if ($resultat_null == null )
                         <div>Nombre de messages : <strong>test</strong></div>
 
                         <div class="d-flex h-25">
-                            <a href=""  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
+                            <a href="ajout_like.php"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
                             <p><?php echo ' '. $nombre_like[0]; ?> </p>
-                            <a href=""  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
+                            <a href="ajout_dislike.php"  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
                             <p><?php echo ' '. $nombre_dislike[0]; ?></p>
                         </div>
                         
@@ -82,12 +86,14 @@ if ($resultat_null == null )
 
 
 
-
-$req = $bdd->prepare(' SELECT aime FROM aime WHERE id_user = :id and id_message = :id_mess ');
+// affichage si LIKE trouvé
+$req = $bdd->prepare(' SELECT * FROM aime WHERE id_user = :id and id_message = :id_mess ');
 $req->execute(array( 'id' => $id_user , 'id_mess' => $id_message ));
 $recherche_like = $req->fetch(PDO::FETCH_ASSOC);
+$_SESSION['like']=$recherche_like;
+
 echo '<pre>';
-var_dump($recherche_like);
+var_dump($_SESSION['like']);
 echo '</pre>';
 if ($recherche_like['aime'] == 1 )
 {
@@ -109,7 +115,7 @@ if ($recherche_like['aime'] == 1 )
                         <div>Nombre de messages : <strong>test</strong></div>
 
                         <div class="d-flex h-25">
-                            <a href=""  title="j'aime"><img class="img_like" src="../img/like_checked.png" alt=""></a>
+                            <a href="supprimer_like.php"  title="j'aime"><img class="img_like" src="../img/like_checked.png" alt=""></a>
                             <p><?php echo ' '. $nombre_like[0]; ?> </p>
                             <a href=""  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
                             <p><?php echo ' '. $nombre_dislike[0]; ?></p>
@@ -126,12 +132,16 @@ if ($recherche_like['aime'] == 1 )
 <?php
 }
 
-$req = $bdd->prepare(' SELECT pas_aime FROM aime WHERE id_user = :id and id_message = :id_mess ');
+
+
+
+// affichage si DISLIKE trouvé
+$req = $bdd->prepare(' SELECT * FROM aime WHERE id_user = :id and id_message = :id_mess ');
 $req->execute(array( 'id' => $id_user , 'id_mess' => $id_message ));
 $recherche_dislike = $req->fetch(PDO::FETCH_ASSOC);
-echo '<pre>';
-var_dump($recherche_dislike);
-echo '</pre>';
+// echo '<pre>';
+// var_dump($recherche_dislike);
+// echo '</pre>';
 if ($recherche_dislike['pas_aime'] == 1 )
 {
 
