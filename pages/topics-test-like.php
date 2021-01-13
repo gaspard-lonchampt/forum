@@ -5,6 +5,9 @@ require ('../include/pages/head.php');
 
 require ('../include/pages/naviguation.php'); 
 
+require ('../classe/class-like-dislike.php'); 
+
+
 try 
 {
     $bdd = new PDO('mysql:host=localhost;dbname=forum;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -15,8 +18,16 @@ catch (Exception $e)
 }
 
 
+
+$like = new Like_dislike(null,null,null,null,null);
+
+
 $id_user = 1;
 $id_message = 10;
+
+$nombre_like = $like->compte_nombre_like($id_message);
+
+$nombre_dislike = $like->compte_nombre_dislike($id_message);
 
 // $req = $bdd->query('SELECT * FROM aime');
 // echo '<pre>';
@@ -25,14 +36,16 @@ $id_message = 10;
 
 
 
-$req2 = $bdd->prepare(' SELECT COUNT(*) FROM aime WHERE id_message = :id_message and aime = 1');// recherche nombre like
-$req2->execute(array( 'id_message' => $id_message , ));
-$nombre_like = $req2->fetch();
+// $req2 = $bdd->prepare(' SELECT COUNT(*) FROM aime WHERE id_message = :id_message and aime = 1');// recherche nombre like
+// $req2->execute(array( 'id_message' => $id_message , ));
+// $nombre_like = $req2->fetch();
 
 
-$req2 = $bdd->prepare(' SELECT COUNT(*) FROM aime WHERE id_message = :id_message and pas_aime = 1');// recherche nombre disllike
-$req2->execute(array( 'id_message' => $id_message , ));
-$nombre_dislike = $req2->fetch();
+// $req2 = $bdd->prepare(' SELECT COUNT(*) FROM aime WHERE id_message = :id_message and pas_aime = 1');// recherche nombre disllike
+// $req2->execute(array( 'id_message' => $id_message , ));
+// $nombre_dislike = $req2->fetch();
+
+
 
 
 
@@ -163,7 +176,7 @@ if ($recherche_dislike['pas_aime'] == 1 )
                         <div>Nombre de messages : <strong>test</strong></div>
 
                         <div class="d-flex h-25">
-                            <a href="supprimer_dislike_ajout_like"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
+                            <a href="supprimer_dislike_ajout_like.php"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
                             <p><?php echo ' '. $nombre_like[0]; ?> </p>
                             <a href="supprimer_like_&_dislike.php"  title="je n'aime pas"><img class="img_like" src="../img/dislike_checked.png" alt=""></a>
                             <p><?php echo ' '. $nombre_dislike[0]; ?></p>
