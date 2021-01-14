@@ -279,7 +279,7 @@ public function new_topic()
 
         $this->bdd = null;
 
-        header('location:new_topic_cree_confirm.php');
+        header('Location: new_topic_cree_confirm.php') ;
 
             
 

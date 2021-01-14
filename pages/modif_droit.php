@@ -3,7 +3,7 @@
 
     if(isset($_SESSION['user']))
     {
-        if($_SESSION['user']['id_droit'] != 2)
+        if($_SESSION['user']['id_droit'] != 3)
         {
             header("Location: ../index.php") ;
         }

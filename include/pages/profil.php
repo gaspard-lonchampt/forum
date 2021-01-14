@@ -17,7 +17,7 @@
                 if(($_POST['pass'] == $_POST['confirm_pass']) && (preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$#',$_POST['pass'])))
                 {
                     $user = new Utilisateur($login,$password,$nom,$prenom,$age,$id_droit);
-                    $user->connexionBdd("forum", "root","root");
+                    $user->connexionBdd("forum", "root","");
                     $msg = $user->update($id);    
 
                     $infos_utilisateur = $user->getAllinfos(); 
@@ -37,7 +37,7 @@
             }
         }
 
-        if($_SESSION['user']['id_droit'] == 2)
+        if($_SESSION['user']['id_droit'] == 3)
         {
             $link_admin = '<a href="../pages/modif_droit.php"> Modifier les droits des utilisateurs </a>' ; 
         }

@@ -13,40 +13,41 @@
         </div>
       </div>
     </div>
-  </header>
+</header>
 
 <?php
 
 
-    include ('../classe/conversation.php'); 
-    $conversation = new Conversation (NULL, NULL, NULL, NULL, NULL, NULL); 
+    include ('../classe/class_messages.php'); 
+    $message = new Messages (NULL, NULL, NULL, NULL, NULL, NULL); 
 
     if (!isset($_SESSION['user']['id_droit'])) {
-      $conversation->display_conversation_public();
+        $message->afficheMessagesPublic();
     }
 
     elseif ($_SESSION['user']['id_droit'] == 1) {
       
-      $conversation->create_conversation();
-      $conversation->display_conversation_user ();
+        $message->create_message();
+        $message->afficheMessagesConnect();
       
     }
 
     elseif ($_SESSION['user']['id_droit'] == 2) {
-      $conversation->create_conversation();
-      $conversation->display_conversation_moderateur ();
+        
+        $message->create_message();
+        $message->afficheMessagesModo();
+        
      
     }
 
     elseif ($_SESSION['user']['id_droit'] == 3) {
     
-      $conversation->create_conversation();
-      $conversation->display_conversation_admin ();
-      
+        $message->create_message();
+        $message->afficheMessagesAdmin();
     }
 
     else {
-      echo "C'est pas une science exacte, on est à une vache près";
+      echo "Erreur";
     }
 
 

@@ -1,4 +1,4 @@
-<form action="conversation.php" method="POST" >
+<form action="conversation.php?id=<?php echo $_GET['id'];?>" method="POST" >
   <div class="container border p-4">
   <h1 class="text-center">Créer une nouvelle conversation</h1>
   <div class="form-group container d-flex flex-column justify-content-center p-4">
