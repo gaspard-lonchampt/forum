@@ -79,7 +79,7 @@ class Conversation {
                     <div class="card mb-4">
                         <div class="card-header">
                             <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
-                            <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['1']?>"><?php echo $value['3'] ?></a>
+                            <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['0']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
                                 <div class="media-body ml-3"> <a href=""><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>

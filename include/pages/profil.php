@@ -137,13 +137,15 @@
 
                             <div class="form-group border-0">
                                 <label for="avatar">Avatar</label>
+                                <div class="container ml-0 w-25 h-25">
                                 <?php 
                                 if(!empty($_SESSION['user']['avatar'])) {
                                 ?>   
-                                <img src="../img/avatars/<?php echo $_SESSION['user']['avatar'] ?>" class="d-block ui-w-40 rounded-circle" style="width alt="avatar">
+                                <img src="../img/avatars/<?php echo $_SESSION['user']['avatar'] ?>" class="w-100 h-100" alt="avatar">
                                 <?php 
                                 }
                                 ?>
+                                </div>
                                 <input type="file" class="form-control border-0" id="avatar" name="avatar" >
                             </div>
                             <?php if(isset($msg)) { echo $msg ;} ?>
