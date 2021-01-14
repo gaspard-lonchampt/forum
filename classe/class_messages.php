@@ -23,7 +23,7 @@ class Messages{
 
     public function db_connexion() {
         try {
-            $bdd = new PDO("mysql:host=localhost;dbname=forum", 'root', 'root');
+            $bdd = new PDO("mysql:host=localhost;dbname=forum", 'root', '');
             $bdd -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $bdd;
         }
@@ -123,7 +123,7 @@ class Messages{
         <?php
         }
         
-        include ('../include/pages/message_form.php');
+        echo '<p class="error"> Vous devez être connecter pour pouvoir répondre </p>' ;  
 
     }
 
@@ -186,7 +186,7 @@ class Messages{
 
     public function afficheMessagesModo()
     {
-        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
+        $requete = $this->bdd->prepare("SELECT messages.id,message,date_heure_post,login 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
                                                         ON messages.id_posteur = utilisateurs.id 
@@ -217,7 +217,7 @@ class Messages{
                                     </div>
                                     <div class="text-muted small ml-3">
                                         <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
-                                        <div><strong>200 (nombre à insérer en php)</strong> de post</div>
+                                        <div ><a class="text-danger" href="supprimer_message_confirm.php?id=<?php echo $value['id'];?>">Supprimer le message</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -298,6 +298,30 @@ class Messages{
         }
         
         include ('../include/pages/message_form.php');
+    }
+
+    public function supprimer_message() 
+    {
+        $requete = $this->bdd->prepare("DELETE FROM messages WHERE id = :id") ; 
+
+        $requete->bindParam(':id' , $_GET['id']) ; 
+
+        $requete->execute(); 
+    }
+
+    public function recupIdconv()
+    {
+        $requete = $this->bdd->prepare("SELECT id_conversations FROM messages WHERE id = :id") ; 
+        $requete->bindParam(':id', $_GET['id']); 
+   
+        $requete->execute(); 
+   
+        $result = $requete->fetch(); 
+   
+        $_GET['id_conv'] = $result['id_conversations'] ;
+
+        return $_GET['id_conv'] ; 
+        
     }
 
 
