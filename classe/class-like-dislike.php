@@ -61,13 +61,13 @@ public function affiche_bouton_sans_like_ni_dislike($variable_1, $variable_2)
         
      
 
-                                <div class="d-flex h-25">
-                                    <a href="ajout_like.php"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
-                                    <p><?php echo ' '. $nombre_like[0]; ?> </p>
-                                    <a href="ajout_dislike.php"  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
-                                    <p><?php echo ' '. $nombre_dislike[0]; ?></p>
-                                </div>
-           
+            <div class="d-flex h-25">
+                <a href="ajout_like.php?id=<?php echo $variable_2 ;?>"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
+                <p><?php echo ' '. $nombre_like[0]; ?> </p>
+                <a href="ajout_dislike.php?id=<?php echo $variable_2 ;?>"  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
+                <p><?php echo ' '. $nombre_dislike[0]; ?></p>
+            </div>
+
         <?php
         }
     }
@@ -94,9 +94,9 @@ public function affiche_bouton_avec_like($variable_1, $variable_2)
 
         
                                 <div class="d-flex h-25">
-                                    <a href="supprimer_like_&_dislike.php"  title="j'aime"><img class="img_like" src="../img/like_checked.png" alt=""></a>
+                                    <a href="supprimer_like_&_dislike.php?id=<?php echo $variable_2 ;?>"  title="j'aime"><img class="img_like" src="../img/like_checked.png" alt=""></a>
                                     <p><?php echo ' '. $nombre_like[0]; ?> </p>
-                                    <a href="supprimer_like_ajout_dislike.php"  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
+                                    <a href="supprimer_like_ajout_dislike.php?id=<?php echo $variable_2 ;?>"  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
                                     <p><?php echo ' '. $nombre_dislike[0]; ?></p>
                                 </div>
                                 
@@ -129,9 +129,9 @@ public function affiche_bouton_avec_dislike($variable_1, $variable_2)
 
         
                     <div class="d-flex h-25">
-                            <a href="supprimer_dislike_ajout_like.php"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
+                            <a href="supprimer_dislike_ajout_like.php?id=<?php echo $variable_2; ?>"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
                             <p><?php echo ' '. $nombre_like[0]; ?> </p>
-                            <a href="supprimer_like_&_dislike.php"  title="je n'aime pas"><img class="img_like" src="../img/dislike_checked.png" alt=""></a>
+                            <a href="supprimer_like_&_dislike.php?id=<?php echo $variable_2 ;?>"  title="je n'aime pas"><img class="img_like" src="../img/dislike_checked.png" alt=""></a>
                             <p><?php echo ' '. $nombre_dislike[0]; ?></p>
                         </div>
                                 
@@ -145,30 +145,31 @@ public function affiche_bouton_avec_dislike($variable_1, $variable_2)
 
 
 
-public function Supprimer_like_et_dislike($a)
+public function Supprimer_like_et_dislike($id_message, $id_user)
     {
 
         $bdd = $this->connection_bdd();
-        $req = $bdd->prepare('DELETE FROM aime WHERE id = :id_like ');
-        $req->execute(array('id_like' => $a['id']));
+        $req = $bdd->prepare('DELETE FROM aime WHERE id_message = :id_message AND id_user = :id_user ');
+        $req->execute(array('id_message' => $id_message, 'id_user' => $id_user  ));
         $bdd = null;
 
-        header('Location: messages.php');//redirection
+        
 
     }
 
 
     
-public function supprimer_dislike_ajout_like($a)
+public function supprimer_dislike_ajout_like($id_message, $id_user)
     {
         $bdd = $this->connection_bdd();
 
-        $req = $bdd->prepare('DELETE FROM aime WHERE id = :id_like ');
-        $req->execute(array('id_like' => $a['id']));
+        $req = $bdd->prepare('DELETE FROM aime WHERE id_message = :id_like and id_user = :id_user and pas_aime = 1');
+        $req->execute(array('id_like' => $id_message,
+                            'id_user' =>$id_user
+    ));
                     
                             
-        $id_message= $a['id_message'];
-        $id_user = $a['id_user'];
+
         $aime = 1;
         $pas_aime = 0;
 
@@ -182,18 +183,20 @@ public function supprimer_dislike_ajout_like($a)
         $bdd = null;
 
 
-        header('Location: messages.php');//redirection
+   
     }
 
 
-public function supprimer_like_ajout_dislike($a)
+public function supprimer_like_ajout_dislike($id_message, $id_user)
     {
         $bdd = $this->connection_bdd();
-        $req = $bdd->prepare('DELETE FROM aime WHERE id = :id_like ');
-        $req->execute(array('id_like' => $a['id'] ));
+        $req = $bdd->prepare('DELETE FROM aime WHERE id_message = :id_like and id_user = :id_user and aime = 1');
+        $req->execute(array('id_like' => $id_message,
+                            'id_user' =>$id_user
+    ));
                 
-        $id_message= $a['id_message'];
-        $id_user = $a['id_user'];
+    
+
         $aime = 0;
         $pas_aime = 1;
 
@@ -215,8 +218,7 @@ public function ajout_dislike($id_message,$id_user)
         $bdd = $this->connection_bdd();
         
         
-        $id_message = $value['id'];
-        $id_user = $_SESSION['user']['id'];
+
         $aime = 0;
         $pas_aime = 1;
         $req = $bdd->prepare('INSERT INTO aime(id_message, id_user,aime,pas_aime) VALUES(:id_message, :id_user, :aime, :pas_aime)');
@@ -229,10 +231,29 @@ public function ajout_dislike($id_message,$id_user)
                                $bdd = null;
                              
         
-                              header('Location: message.php');//redirection
         
     }
 
+public function ajout_like($id_message,$id_user)
+    {
 
+        $bdd = $this->connection_bdd();
+
+     
+    
+        $aime = 1;
+        $pas_aime = 0;
+        $req = $bdd->prepare('INSERT INTO aime(id_message, id_user,aime,pas_aime) VALUES(:id_message, :id_user, :aime, :pas_aime)');
+                                    $req->execute(array(
+                                   'id_message' => $id_message,                                                                         
+                                   'id_user' => $id_user,
+                                   'aime' => $aime,
+                                   'pas_aime' => $pas_aime,
+                                                      ));
+                               $bdd = null;
+                             
+        
+                            //   header('Location: message.php');//redirection
+    }
 
 }

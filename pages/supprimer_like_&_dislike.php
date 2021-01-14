@@ -9,11 +9,11 @@ require ('../classe/class-like-dislike.php');
 
 $like = new Like_dislike(null,null,null,null,null);
 
-$like_et_dislike = $_SESSION['like'];
 
+$id_user = $_SESSION['user']['id'];
+$id_message = $_GET['id'];
+$like->Supprimer_like_et_dislike($id_message, $id_user);
 
-$like->Supprimer_like_et_dislike($like_et_dislike);
-
-
+header('Location: message.php?id=' .$_SESSION['id_get']);//redirection
 
 ?>

@@ -224,7 +224,7 @@ $id_user = NULL ;
         $requete->execute(); 
 
         $result = $requete->fetchAll();
-
+        $id_user = $_SESSION['user']['id'] ;
         foreach($result as $key => $value)
         {
             ?>
@@ -250,7 +250,13 @@ $id_user = NULL ;
                                 
                             </div>
                             <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
-                                <div class="px-4 pt-3"> <a href="" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true"> <i class="fa fa-heart text-danger"></i>&nbsp; <span class="align-middle">445</span> </a> <span class="text-muted d-inline-flex align-items-center align-middle ml-4"> <i class="fa fa-eye text-muted fsize-3"></i>&nbsp; <span class="align-middle">14532</span> </span> </div>
+                                <div class="px-4 pt-3">
+                                <a href="" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true">
+                                            <?php $id = $value['0'];$_SESSION['id_message'] = $id;     parent::affiche_bouton_sans_like_ni_dislike($id_user, $id);        
+                                                                        parent::affiche_bouton_avec_like($id_user, $id);
+                                                                       parent::affiche_bouton_avec_dislike($id_user, $id);
+                                            ?> 
+                                    </a>                                    </div>
                                 <div class="px-4 pt-3"> <button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Répondre</button> </div>
                             </div>
                         </div>
@@ -268,7 +274,7 @@ $id_user = NULL ;
 
     public function afficheMessagesAdmin()
     {
-        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
+        $requete = $this->bdd->prepare("SELECT messages.id,message,date_heure_post,login 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
                                                         ON messages.id_posteur = utilisateurs.id 
@@ -283,7 +289,7 @@ $id_user = NULL ;
         $requete->execute(); 
 
         $result = $requete->fetchAll();
-
+        $id_user = $_SESSION['user']['id'] ;
         foreach($result as $key => $value)
         {
             ?>
@@ -309,7 +315,13 @@ $id_user = NULL ;
                                 
                             </div>
                             <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
-                                <div class="px-4 pt-3"> <a href="" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true"> <i class="fa fa-heart text-danger"></i>&nbsp; <span class="align-middle">445</span> </a> <span class="text-muted d-inline-flex align-items-center align-middle ml-4"> <i class="fa fa-eye text-muted fsize-3"></i>&nbsp; <span class="align-middle">14532</span> </span> </div>
+                                <div class="px-4 pt-3"> 
+                                <a href="" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true">
+                                            <?php $id = $value['0'];$_SESSION['id_message'] = $id; parent::affiche_bouton_sans_like_ni_dislike($id_user, $id);        
+                                                                    parent::affiche_bouton_avec_like($id_user, $id);
+                                                                    parent::affiche_bouton_avec_dislike($id_user, $id);
+                                            ?> 
+                                    </a>                                  </div>
                                 <div class="px-4 pt-3"> <a href="messages.php#reponse"><button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Répondre</button></a> </div>
                             </div>
                         </div>
