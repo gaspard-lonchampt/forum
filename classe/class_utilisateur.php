@@ -67,8 +67,8 @@ class Utilisateur {
         if($this->checkLogin() == 0)
         {
 
-            $requete = $this->connexion->prepare("INSERT INTO utilisateurs(login,password,nom,prenom,age,id_droit) 
-                                                            VALUES (:login, :password, :nom, :prenom, :age, :id_droit)"); 
+            $requete = $this->connexion->prepare("INSERT INTO utilisateurs(login,password,nom,prenom,age,id_droit, avatar) 
+                                                            VALUES (:login, :password, :nom, :prenom, :age, :id_droit, :avatar)"); 
                     
             $requete->bindParam(':login', $this->login);
             $requete->bindParam(':password', $this->password);
@@ -76,6 +76,7 @@ class Utilisateur {
             $requete->bindParam(':prenom', $this->prenom);
             $requete->bindParam(':age', $this->age);
             $requete->bindParam(':id_droit', $this->id_droit);
+            $requete->bindValue(':avatar', "defaut.jpg");
 
             $requete->execute();
 
