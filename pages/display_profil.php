@@ -29,7 +29,7 @@ include ('../include/pages/naviguation.php');
 include ("../classe/class_utilisateur.php"); 
 
         $user = new Utilisateur(NULL, NULL, NULL ,NULL, NULL, NULL );
-        $user->connexionBdd("forum", "root","root");
+        $user->connexionBdd("forum", "root","");
         $user->profilDisplay();
 
 
