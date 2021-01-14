@@ -2,7 +2,8 @@
 session_start();
 
 
-
+if ( !isset($_SESSION['user']))
+{  header('Location: message.php?id=' .$_SESSION['id_get']);}//redirection}
 
 require ('../classe/class-like-dislike.php'); 
 
@@ -14,6 +15,6 @@ $id_user = $_SESSION['user']['id'];
 $id_message = $_GET['id'];
 $like->Supprimer_like_et_dislike($id_message, $id_user);
 
-header('Location: message.php?id=' .$_SESSION['id_get']);//redirection
+header('Location: message.php?id=' .$_SESSION['id_get'].'#'.$id_message );//redirection
 
 ?>

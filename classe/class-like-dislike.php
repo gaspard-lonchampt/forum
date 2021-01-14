@@ -61,10 +61,13 @@ public function affiche_bouton_sans_like_ni_dislike($variable_1, $variable_2)
         
      
 
-            <div class="d-flex h-25">
-                <a href="ajout_like.php?id=<?php echo $variable_2 ;?>"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
+            <div class="d-flex ">
+                <a class="mr-1 " href="ajout_like.php?id=<?php echo $variable_2 ;?>"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
+
                 <p><?php echo ' '. $nombre_like[0]; ?> </p>
-                <a href="ajout_dislike.php?id=<?php echo $variable_2 ;?>"  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
+
+                <a class="ml-4 mr-1 " href="ajout_dislike.php?id=<?php echo $variable_2 ;?>"  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
+
                 <p><?php echo ' '. $nombre_dislike[0]; ?></p>
             </div>
 
@@ -90,15 +93,16 @@ public function affiche_bouton_avec_like($variable_1, $variable_2)
         {
         
         ?>
-        
 
-        
-                                <div class="d-flex h-25">
-                                    <a href="supprimer_like_&_dislike.php?id=<?php echo $variable_2 ;?>"  title="j'aime"><img class="img_like" src="../img/like_checked.png" alt=""></a>
-                                    <p><?php echo ' '. $nombre_like[0]; ?> </p>
-                                    <a href="supprimer_like_ajout_dislike.php?id=<?php echo $variable_2 ;?>"  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
-                                    <p><?php echo ' '. $nombre_dislike[0]; ?></p>
-                                </div>
+           <div class="d-flex h-25">
+               <a class="mr-1 " href="supprimer_like_&_dislike.php?id=<?php echo $variable_2 ;?>"  title="j'aime"><img class="img_like" src="../img/like_checked.png" alt=""></a>
+
+               <p><?php echo ' '. $nombre_like[0]; ?> </p>
+
+               <a class="ml-4 mr-1 " href="supprimer_like_ajout_dislike.php?id=<?php echo $variable_2 ;?>"  title="je n'aime pas"><img class="img_like" src="../img/dislike.png" alt=""></a>
+
+               <p><?php echo ' '. $nombre_dislike[0]; ?></p>
+           </div>
                                 
  
         <?php
@@ -127,13 +131,12 @@ public function affiche_bouton_avec_dislike($variable_1, $variable_2)
         ?>
        
 
-        
-                    <div class="d-flex h-25">
-                            <a href="supprimer_dislike_ajout_like.php?id=<?php echo $variable_2; ?>"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
-                            <p><?php echo ' '. $nombre_like[0]; ?> </p>
-                            <a href="supprimer_like_&_dislike.php?id=<?php echo $variable_2 ;?>"  title="je n'aime pas"><img class="img_like" src="../img/dislike_checked.png" alt=""></a>
-                            <p><?php echo ' '. $nombre_dislike[0]; ?></p>
-                        </div>
+          <div class="d-flex h-25">
+                  <a class="mr-1 " href="supprimer_dislike_ajout_like.php?id=<?php echo $variable_2; ?>"  title="j'aime"><img class="img_like" src="../img/like.png" alt=""></a>
+                  <p><?php echo ' '. $nombre_like[0]; ?> </p>
+                  <a class="ml-4 mr-1 " href="supprimer_like_&_dislike.php?id=<?php echo $variable_2 ;?>"  title="je n'aime pas"><img class="img_like" src="../img/dislike_checked.png" alt=""></a>
+                  <p><?php echo ' '. $nombre_dislike[0]; ?></p>
+              </div>
                                 
  
         <?php
@@ -152,8 +155,7 @@ public function Supprimer_like_et_dislike($id_message, $id_user)
         $req = $bdd->prepare('DELETE FROM aime WHERE id_message = :id_message AND id_user = :id_user ');
         $req->execute(array('id_message' => $id_message, 'id_user' => $id_user  ));
         $bdd = null;
-
-        
+ 
 
     }
 

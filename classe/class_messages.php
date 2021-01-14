@@ -49,9 +49,9 @@ class Messages extends Like_dislike{
             $sql->execute() ; 
     
             $result = $sql->fetch(); 
-            echo $_GET['id'] ; 
+            // echo $_GET['id'] ; 
 
-            var_dump($result) ;
+            // var_dump($result) ;
     
             $requete = $this->bdd->prepare("INSERT INTO messages (id_conversations, id_topic, id_posteur, date_heure_post, message, id_visibilite)
                                                         VALUES (:id_conversations, :id_topic, :id_posteur, :date_heure_post, :message, :id_visibilite)
@@ -88,10 +88,8 @@ class Messages extends Like_dislike{
 
         $result = $requete->fetchAll();
 
-echo '<pre>';
-print_r($result);
-echo '</pre>';
-$id_user = NULL ;
+
+        $id_user = NULL ;
         foreach($result as $key => $value)
         {
             ?>
@@ -135,7 +133,12 @@ $id_user = NULL ;
         <?php
         }
         
-        echo '<p class="error"> Vous devez être connecter pour pouvoir répondre </p>' ;  
+        echo '<div class="container d-block p-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p id="mess_error_repondre_liker" class="error text-center"> Vous devez être connecter pour pouvoir répondre et liker </p></div>
+                     </div>
+                </div>' ;  
 
     }
 
@@ -156,16 +159,13 @@ $id_user = NULL ;
         $requete->execute(); 
 
 
-        echo '<pre>';
-        print_r($_SESSION);
-        echo '</pre>';
 
         $result = $requete->fetchAll();
         $id_user = $_SESSION['user']['id'] ;
         foreach($result as $key => $value)
         {
             ?>
-            <div class="container d-block p-5">
+            <div class="container d-block p-5" id="<?=$value['id']?>">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card mb-4">
@@ -228,7 +228,7 @@ $id_user = NULL ;
         foreach($result as $key => $value)
         {
             ?>
-            <div class="container d-block p-5">
+            <div class="container d-block p-5"  id="<?=$value['id']?>">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card mb-4">
@@ -293,7 +293,7 @@ $id_user = NULL ;
         foreach($result as $key => $value)
         {
             ?>
-            <div class="container d-block p-5">
+            <div class="container d-block p-5"  id="<?=$value['id']?>">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card mb-4">
