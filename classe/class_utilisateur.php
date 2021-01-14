@@ -180,7 +180,7 @@ class Utilisateur {
         
         foreach ($result as $key => $value ) { 
             $nombre_conversations= $topic->compter_nombre_conversation($value['id']);
-            $nombre_mmessages = $topic->compter_nombre_messages($value['id']);
+            $nombre_messages = $topic->compter_nombre_messages($value['id']);
        
 
             ?>
@@ -200,9 +200,8 @@ class Utilisateur {
                                 <div class="media-body ml-2"><?php echo "Age:&nbsp". "<strong>". $value['age'] ."</strong>" ?></div>
                                 </div>
                                 <div class="text-muted small">
-                                    <div><strong>Nombre de Conversation:</strong></div><?php echo $nombre_conversations[0] ?>
-                                    <br>
-                                    <div><strong>Nombre de Message:</strong></div><?php echo $nombre_mmessages[0] ?>
+                                    <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
+                                    <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                 </div>
                                 </div>
                                 </div>  
