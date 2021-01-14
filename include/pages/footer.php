@@ -36,15 +36,48 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?php 
+                if (!isset($repere)) {
+                    echo '../vendor/jquery/jquery.min.js';
+                }
+                else {
+                    echo 'vendor/jquery/jquery.min.js';
+                }?>"></script>
+
+  <script src="<?php 
+                if (!isset($repere)) {
+                    echo '../vendor/bootstrap/js/bootstrap.bundle.min.js';
+                }
+                else {
+                    echo 'vendor/bootstrap/js/bootstrap.bundle.min.js';
+                }?>"></script>
 
   <!-- Contact Form JavaScript -->
-  <script src="js/jqBootstrapValidation.js"></script>
-  <script src="js/contact_me.js"></script>
+  <script src="<?php 
+                if (!isset($repere)) {
+                  echo '../js/jqBootstrapValidation.js';
+                }
+                else {
+                  echo 'js/jqBootstrapValidation.js';
+                }?>"></script>
+
+  <script src=" <?php 
+                  if (!isset($repere)) {
+                      echo '../js/contact_me.js';
+                  }
+                  else {
+                      echo 'js/contact_me.js';
+                  }?>"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/clean-blog.min.js"></script>
+                
+  <script src="<?php 
+                if (!isset($repere)) {
+                    echo '../js/clean-blog.min.js';
+                }
+                else {
+                    echo 'js/clean-blog.min.js';
+                }?>"></script>
 
 </body>
 </html>

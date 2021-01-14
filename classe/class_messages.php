@@ -23,7 +23,7 @@ class Messages{
 
     public function db_connexion() {
         try {
-            $bdd = new PDO("mysql:host=localhost;dbname=forum", 'root', '');
+            $bdd = new PDO("mysql:host=localhost;dbname=forum", 'root', 'root');
             $bdd -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $bdd;
         }
@@ -50,7 +50,6 @@ class Messages{
             $result = $sql->fetch(); 
             echo $_GET['id'] ; 
 
-            var_dump($result) ;
     
             $requete = $this->bdd->prepare("INSERT INTO messages (id_conversations, id_topic, id_posteur, date_heure_post, message, id_visibilite)
                                                         VALUES (:id_conversations, :id_topic, :id_posteur, :date_heure_post, :message, :id_visibilite)
@@ -71,7 +70,7 @@ class Messages{
 
     public function afficheMessagesPublic()
     {
-        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
+        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login,avatar 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
                                                         ON messages.id_posteur = utilisateurs.id 
@@ -87,8 +86,11 @@ class Messages{
 
         $result = $requete->fetchAll();
 
+       
+
         foreach($result as $key => $value)
         {
+
             ?>
             <div class="container d-block p-5">
                 <div class="row">
@@ -96,7 +98,7 @@ class Messages{
                         <div class="card mb-4">
 
                             <div class="card-header">
-                                <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                            <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
                                     <div class="media-body ml-3"> <a href=""><?= $value['login'] ; ?></a>
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
@@ -129,7 +131,7 @@ class Messages{
 
     public function afficheMessagesConnect()
     {
-        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
+        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login,avatar 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
                                                         ON messages.id_posteur = utilisateurs.id 
@@ -154,7 +156,7 @@ class Messages{
                         <div class="card mb-4">
 
                             <div class="card-header">
-                                <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                                <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
                                     <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ; ?></a>
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
@@ -186,7 +188,7 @@ class Messages{
 
     public function afficheMessagesModo()
     {
-        $requete = $this->bdd->prepare("SELECT messages.id,message,date_heure_post,login 
+        $requete = $this->bdd->prepare("SELECT messages.id,message,date_heure_post,login,avatar 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
                                                         ON messages.id_posteur = utilisateurs.id 
@@ -211,7 +213,7 @@ class Messages{
                         <div class="card mb-4">
 
                             <div class="card-header">
-                                <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                                <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
                                     <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ; ?></a>
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
@@ -245,7 +247,7 @@ class Messages{
 
     public function afficheMessagesAdmin()
     {
-        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login 
+        $requete = $this->bdd->prepare("SELECT message,date_heure_post,login,avatar 
                                                 FROM messages 
                                                     INNER JOIN utilisateurs
                                                         ON messages.id_posteur = utilisateurs.id 
@@ -270,7 +272,7 @@ class Messages{
                         <div class="card mb-4">
 
                             <div class="card-header">
-                                <div class="media flex-wrap w-100 align-items-center"> <img src="../img/fuck-cat.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                                <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
                                     <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ; ?></a>
                                         <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>

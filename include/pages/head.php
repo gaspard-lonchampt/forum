@@ -37,8 +37,7 @@
                   }
                   else {
                     echo 'css/clean-blog.min.css';
-                  }?>
-                    " rel="stylesheet">
+                  }?>" rel="stylesheet">
 
 </head>
 <body>

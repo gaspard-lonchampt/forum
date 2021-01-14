@@ -85,7 +85,7 @@
                 }
                 else {
                     echo 'pages/display_profil.php';
-                }?>">Voir les profils des membres</a>
+                }?>">Espace membre</a>
           </li>
           <?php
           }
