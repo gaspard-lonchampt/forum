@@ -11,13 +11,42 @@
             $age = htmlspecialchars($_POST['age']) ;
             $id = htmlspecialchars($_SESSION['user']['id']) ; // Pour modif la bonne ligne dans la bdd 
             $id_droit = htmlspecialchars($_SESSION['user']['id_droit']) ; // Pour la modif du profil on garde toujours le même id_droit qu'avant. L'admin le fera ailleurs sur une autre page 
-        
-            if(!empty($login) && !empty($nom) && !empty($prenom) && !empty($age) && !empty($password) && !empty($confirm_pass))
+            $avatar = $_FILES['avatar'];
+
+            if(!empty($login) && !empty($nom) && !empty($prenom) && !empty($age) && !empty($password) && !empty($confirm_pass) && !empty($avatar))
             {
                 if(($_POST['pass'] == $_POST['confirm_pass']) && (preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$#',$_POST['pass'])))
                 {
                     $user = new Utilisateur($login,$password,$nom,$prenom,$age,$id_droit);
-                    $user->connexionBdd("forum", "root","");
+                    $bdd = $user->connexionBdd("forum", "root","root");
+
+
+                    if(isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name'])) {
+                        $tailleMax = 2097152;
+                        $extensionsValides = ['jpg', 'jpeg', 'gif', 'png'];
+                        if($_FILES['avatar']['size'] <= $tailleMax) {
+                           $extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+                           if(in_array($extensionUpload, $extensionsValides)) {
+                              $chemin = "../img/avatars/".$_SESSION['user']['id'].".".$extensionUpload;
+                              $resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $chemin);
+                              if($resultat) {
+                                 $updateavatar = $bdd->prepare('UPDATE utilisateurs SET avatar = :avatar WHERE id = :id');
+                                 $updateavatar->execute([
+                                    'avatar' => $_SESSION['user']['id'].".".$extensionUpload,
+                                    'id' => $_SESSION['user']['id']
+                                 ]);
+                                 header('Location: profil.php');
+                              } else {
+                                 $msg = "Erreur durant l'importation de votre photo de profil";
+                              }
+                           } else {
+                              $msg = "Votre photo de profil doit être au format jpg, jpeg, gif ou png";
+                           }
+                        } else {
+                           $msg = "Votre photo de profil ne doit pas dépasser 2Mo";
+                        }
+                     }
+
                     $msg = $user->update($id);    
 
                     $infos_utilisateur = $user->getAllinfos(); 
@@ -73,7 +102,7 @@
                     </div>
 
                     <div class="col-12 col-lg-6">
-                        <form action="profil.php" method="POST">
+                        <form action="profil.php" method="POST" enctype="multipart/form-data">
 
                             <div class="form-group">
                                 <label for="user_name"> Nouveau login</label>
@@ -104,6 +133,18 @@
                             <div class="form-group">
                                 <label for="confirm_mdp">Confirmation du nouveau mot de passe </label>
                                 <input type="password" class="form-control" id="confirm_mdp" name="confirm_pass" >
+                            </div>
+
+                            <div class="form-group border-0">
+                                <label for="avatar">Avatar</label>
+                                <?php 
+                                if(!empty($_SESSION['user']['avatar'])) {
+                                ?>   
+                                <img src="../img/avatars/<?php echo $_SESSION['user']['avatar'] ?>" class="d-block ui-w-40 rounded-circle" style="width alt="avatar">
+                                <?php 
+                                }
+                                ?>
+                                <input type="file" class="form-control border-0" id="avatar" name="avatar" >
                             </div>
                             <?php if(isset($msg)) { echo $msg ;} ?>
                             <div>

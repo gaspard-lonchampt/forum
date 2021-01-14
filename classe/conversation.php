@@ -21,7 +21,7 @@ class Conversation {
 
     public function db_connexion() {
         try {
-            $db = new PDO("mysql:host=localhost;dbname=forum", 'root', '');
+            $db = new PDO("mysql:host=localhost;dbname=forum", 'root', 'root');
             $db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $db;
         }
@@ -61,8 +61,15 @@ class Conversation {
         $requete->execute(['id_topic' => $id_topic]);
         $conversation= $requete->fetchall();
 
+         
+        include ("../classe/class-topic.php");
+        $topic = new Topic(NULL,NULL, NULL,NULL, NULL);
 
         foreach ($conversation as $key => $value ) { 
+            
+            $nombre_conversations= $topic->compter_nombre_conversation($value['id']);
+            $nombre_messages = $topic->compter_nombre_messages($value['id']);
+
 
             ?>
         
@@ -79,8 +86,8 @@ class Conversation {
                                     <div class="text-muted small"><?php echo "Créé le&nbsp" . $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
-                                    <div>Membre depuis <strong> date en php à insérer</strong></div>
-                                    <div><strong>200 (nombre à insérer en php)</strong> de post</div>
+                                    <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
+                                    <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                 </div>
                                 </div>
                                 </div>  
@@ -104,9 +111,13 @@ class Conversation {
         $requete->execute(['id_topic' => $id_topic]);
         $conversation= $requete->fetchall();
 
-        // create_conversation ();
+         include ("../classe/class-topic.php");
+        $topic = new Topic(NULL,NULL, NULL,NULL, NULL);
 
         foreach ($conversation as $key => $value ) { 
+            
+            $nombre_conversations= $topic->compter_nombre_conversation($value['id']);
+            $nombre_messages = $topic->compter_nombre_messages($value['id']);
 
             ?>
         
@@ -123,8 +134,8 @@ class Conversation {
                                     <div class="text-muted small"><?php echo "Créé le&nbsp" . $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
-                                    <div>Membre depuis <strong> date en php à insérer</strong></div>
-                                    <div><strong>200 (nombre à insérer en php)</strong> de post</div>
+                                    <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
+                                    <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                 </div>
                                 </div>
                                 </div>  
@@ -148,9 +159,14 @@ class Conversation {
         $requete->execute(['id_topic' => $id_topic]);
         $conversation= $requete->fetchall();
 
-        // create_conversation ();
+        include ("../classe/class-topic.php");
+        $topic = new Topic(NULL,NULL, NULL,NULL, NULL);
+
 
         foreach ($conversation as $key => $value ) { 
+            
+            $nombre_conversations= $topic->compter_nombre_conversation($value['id']);
+            $nombre_messages = $topic->compter_nombre_messages($value['id']); 
 
             ?>
 
@@ -167,8 +183,8 @@ class Conversation {
                                     <div class="text-muted small"><?php echo "Créé le&nbsp" . $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
-                                    <div>Membre depuis <strong> date en php à insérer</strong></div>
-                                    <div><strong>200 (nombre à insérer en php)</strong> de post</div>
+                                    <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
+                                    <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                 </div>
                                 </div>
                                 </div>  
@@ -192,11 +208,14 @@ class Conversation {
         $requete->execute(['id_topic' => $id_topic]);
         $conversation= $requete->fetchall();
 
-        // echo "<pre>";
-        // var_dump($conversation);
-        // echo "</pre>";
+        include ("../classe/class-topic.php");
+        $topic = new Topic(NULL,NULL, NULL,NULL, NULL);
+
 
         foreach ($conversation as $key => $value ) { 
+            
+            $nombre_conversations= $topic->compter_nombre_conversation($value['id']);
+            $nombre_messages = $topic->compter_nombre_messages($value['id']); 
 
             ?>
         
@@ -213,8 +232,8 @@ class Conversation {
                                     <div class="text-muted small"><?php echo "Créé le&nbsp" . $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
-                                    <div>Membre depuis <strong> date en php à insérer</strong></div>
-                                    <div><strong>200 (nombre à insérer en php)</strong> de post</div>
+                                    <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
+                                    <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                 </div>
                                 </div>
                                 </div>  

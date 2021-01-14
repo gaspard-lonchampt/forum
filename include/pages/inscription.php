@@ -64,7 +64,7 @@ if(isset($_POST['valider']))
                 <div class="row form_inscription">
                     <div class="col-12 col-lg-6">
 
-                        <form action="inscription.php" method="POST">
+                        <form action="inscription.php" method="POST" >
                             <div class="form-group">
                                 <label for="user_name">Login :</label>
                                 <input type="text" class="form-control" id="user_name" name="login" >
