@@ -58,7 +58,7 @@ public function affiche_bouton_sans_like_ni_dislike($variable_1, $variable_2)
         {
 
         ?>
-        </br></br></br></br></br></br></br></br></br>
+        
      
 
                                 <div class="d-flex h-25">
@@ -90,7 +90,7 @@ public function affiche_bouton_avec_like($variable_1, $variable_2)
         {
         
         ?>
-        </br></br></br></br></br></br></br></br></br>
+        
 
         
                                 <div class="d-flex h-25">
@@ -125,7 +125,7 @@ public function affiche_bouton_avec_dislike($variable_1, $variable_2)
         {
         
         ?>
-        </br></br></br></br></br></br></br></br></br>
+       
 
         
                     <div class="d-flex h-25">
@@ -141,6 +141,10 @@ public function affiche_bouton_avec_dislike($variable_1, $variable_2)
         return $_SESSION['dislike']=$recherche_dislike;;
     }   
 
+
+
+
+
 public function Supprimer_like_et_dislike($a)
     {
 
@@ -149,7 +153,7 @@ public function Supprimer_like_et_dislike($a)
         $req->execute(array('id_like' => $a['id']));
         $bdd = null;
 
-        header('Location: topics-test-like.php');//redirection
+        header('Location: messages.php');//redirection
 
     }
 
@@ -178,7 +182,7 @@ public function supprimer_dislike_ajout_like($a)
         $bdd = null;
 
 
-        header('Location: topics-test-like.php');//redirection
+        header('Location: messages.php');//redirection
     }
 
 
@@ -202,11 +206,32 @@ public function supprimer_like_ajout_dislike($a)
                     ));
         $bdd = null;
 
-        header('Location: topics-test-like.php');//redirection
+        header('Location: messages.php');//redirection
     }
 
 
-
+public function ajout_dislike($id_message,$id_user)
+    {
+        $bdd = $this->connection_bdd();
+        
+        
+        $id_message = $value['id'];
+        $id_user = $_SESSION['user']['id'];
+        $aime = 0;
+        $pas_aime = 1;
+        $req = $bdd->prepare('INSERT INTO aime(id_message, id_user,aime,pas_aime) VALUES(:id_message, :id_user, :aime, :pas_aime)');
+                                    $req->execute(array(
+                                   'id_message' => $id_message,                                                                         
+                                   'id_user' => $id_user,
+                                   'aime' => $aime,
+                                   'pas_aime' => $pas_aime,
+                                                      ));
+                               $bdd = null;
+                             
+        
+                              header('Location: message.php');//redirection
+        
+    }
 
 
 

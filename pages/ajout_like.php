@@ -24,7 +24,7 @@ $req = $bdd->prepare('INSERT INTO aime(id_message, id_user,aime,pas_aime) VALUES
                        $bdd = null;
                      
 
-                      header('Location: topics-test-like.php');//redirection
+                      header('Location: message.php');//redirection
                       exit();
 
 
