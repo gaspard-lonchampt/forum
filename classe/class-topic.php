@@ -279,9 +279,7 @@ public function new_topic()
 
         $this->bdd = null;
 
-        header('Location: new_topic_cree_confirm.php') ;
-
-            
+        echo '  <meta http-equiv="refresh" content="0;url=new_topic_cree_confirm.php" />';
 
     }
 
