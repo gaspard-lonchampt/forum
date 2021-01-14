@@ -8,7 +8,7 @@ require ('../classe/class-like-dislike.php');
 $like = new Like_dislike(null,null,null,null,null);
 
 $like_et_dislike = $_SESSION['dislike'];
-$id_message = $_SESSION['id_message'];
+$id_message = $_GET['id'];
 $id_user = $_SESSION['user']['id'];
 
 
