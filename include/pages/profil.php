@@ -74,22 +74,24 @@
         ?>
 
         <?php include ('head.php'); ?>
-        <header class="masthead" style="background-image: url('../img/post-bg.jpg')">
-            <div class="overlay"></div>
-            <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="post-heading">
-                    <h1> Modif profil </h1>
-                    <h2 class="subheading">Pour être au courant des stocks restants.</h2>
-                    <span class="meta">Posted by
-                    <a href="#">Start Bootstrap</a>
-                    on August 24, 2019</span>
-                </div>
-                </div>
-            </div>
-            </div>
-        </header>
+        <header class="masthead" style="background-image: url('../img/contact-bg12.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>il est très courant d'utiliser Ruby avec un interprète, mais il existe également des compilateurs pour ce langage</h1></br>
+            <h2 class="subheading">"Le souvenir, c'est la présence invisible. "
+</h2>
+            <span class="meta">Baptiste, 2021
+           
+             </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
         
         <main>
             <section id="formulaire" class="container">

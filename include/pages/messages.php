@@ -4,11 +4,11 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
-            <h1>Man must explore, and this is exploration at its greatest</h1>
-            <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
-            <span class="meta">Posted by
-              <a href="#">Start Bootstrap</a>
-              on August 24, 2019</span>
+            <h1>" La programmation représente donc ici la rédaction du code source d'un logiciel "</h1>
+            <h2 class="subheading">" L'ignorant affirme, le savant doute, le sage réfléchit "
+</h2>
+            <span class="meta">Alexandre, 2021
+</span>
           </div>
         </div>
       </div>

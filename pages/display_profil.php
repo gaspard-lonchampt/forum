@@ -1,14 +1,15 @@
-<header class="masthead" style="background-image: url('../img/post-bg.jpg')">
+<header class="masthead" style="background-image: url('../img/home-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
-            <h1>Man must explore, and this is exploration at its greatest</h1>
-            <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
-            <span class="meta">Posted by
-              <a href="#">Start Bootstrap</a>
-              on August 24, 2019</span>
+            <h1>Dans un programme informatique typique, on trouvera suivant les langages des boucles while ou for</h1>
+            <h2 class="subheading">" On ne peut comprendre la vie qu'en regardant en arrière ; on ne peut la vivre qu'en regardant en avant "
+</h2>
+            <span class="meta">Patrick Sébastien, 2020
+              
+              </span>
           </div>
         </div>
       </div>

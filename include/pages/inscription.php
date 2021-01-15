@@ -42,17 +42,15 @@ if(isset($_POST['valider']))
 ?>
 
     
-        <header class="masthead" style="background-image: url('../img/post-bg.jpg')">
+        <header class="masthead" style="background-image: url('../img/contact-bg.jpg')">
             <div class="overlay"></div>
             <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="post-heading">
                     <h1> Inscrivez-vous via ce formulaire </h1>
-                    <h2 class="subheading">Pour être au courant des stocks restants.</h2>
-                    <span class="meta">Posted by
-                    <a href="#">Start Bootstrap</a>
-                    on August 24, 2019</span>
+                    <h2 class="subheading">Votre vie s'en retrouvera changée !.</h2>
+                    <span class="meta">fini, les heures à chercher combien on met de &lt;h1&gt; par page... </span>
                 </div>
                 </div>
             </div>

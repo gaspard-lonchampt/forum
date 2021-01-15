@@ -1,6 +1,6 @@
 <?php
 
-    $connexion = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
+    $connexion = new PDO('mysql:host=localhost;dbname=forum', 'root', 'root');
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION) ;
 
     $requete = $connexion->prepare("SELECT login,nom,prenom,age,id FROM utilisateurs");
@@ -16,11 +16,12 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-heading">
-                <h1> Modification des droits </h1>
-                <h2 class="subheading">Pour être au courant des stocks restants.</h2>
-                <span class="meta">Posted by
-                <a href="#">Start Bootstrap</a>
-                on August 24, 2019</span>
+                <h1> Modification des droits </h1></br>
+                <h2 class="subheading">“ Le doute est le commencement de la sagesse.
+”</h2>
+                <span class="meta">Gaspard, 2021
+          
+                </span>
             </div>
             </div>
         </div>

@@ -31,17 +31,15 @@ if(isset($_POST['valider']))
 
 ?>
         <?php include ('head.php'); ?>
-        <header class="masthead" style="background-image: url('../img/post-bg.jpg')">
+        <header class="masthead" style="background-image: url('../img/inscription.jpg')">
             <div class="overlay"></div>
             <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="post-heading">
                     <h1> Page de connexion</h1>
-                    <h2 class="subheading">Pour être au courant des stocks restants.</h2>
-                    <span class="meta">Posted by
-                    <a href="#">Start Bootstrap</a>
-                    on August 24, 2019</span>
+                    <h2 class="subheading">Entrez dans un monde d'échange et de partage.</h2>
+                    <span class="meta">Vous avez des questions, nous avons les réponses !</span>
                 </div>
                 </div>
             </div>
