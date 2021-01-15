@@ -190,20 +190,20 @@ class Utilisateur {
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                        <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
-                            <div class="media-body ml-3"> <?php echo $value['login'] ?>
-                            <hr>
-                            <div class="container d-flex">
-                                <div class="container d-flex flex-column">
-                                <div class="media-body ml-2"><?php echo "Nom:&nbsp". "<strong>". $value['nom'] ."</strong>" ?></div>
-                                <div class="media-body ml-2"><?php echo "Prénom:&nbsp". "<strong>". $value['prenom'] ."</strong>" ?></div>
-                                <div class="media-body ml-2"><?php echo "Age:&nbsp". "<strong>". $value['age'] ."</strong>" ?></div>
-                                </div>
-                                <div class="text-muted small">
-                                    <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
-                                    <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
-                                </div>
-                                </div>
+                            <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/14.jpg" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
+                                <div class="media-body ml-3"> <?php echo $value['login'] ?>
+                                <hr>
+                                    <div class="container d-flex">
+                                        <div class="container d-flex flex-column">
+                                            <div class="media-body ml-2"><?php echo "Nom:&nbsp". "<strong>". $value['nom'] ."</strong>" ?></div>
+                                            <div class="media-body ml-2"><?php echo "Prénom:&nbsp". "<strong>". $value['prenom'] ."</strong>" ?></div>
+                                            <div class="media-body ml-2"><?php echo "Age:&nbsp". "<strong>". $value['age'] ."</strong>" ?></div>
+                                        </div>
+                                        <div class="text-muted small">
+                                            <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
+                                            <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
+                                        </div>
+                                    </div>
                                 </div>  
                             </div>
                         </div>

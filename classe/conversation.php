@@ -81,7 +81,7 @@ class Conversation {
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['13'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
+                            <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
                             <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['0']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
