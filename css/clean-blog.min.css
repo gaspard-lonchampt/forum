@@ -67,4 +67,8 @@
     padding : 20px 0px;
 }
 
+/* CSS pour les coeurs des likes et dislike */
+.img_like{
+    width: 35px;
+}
 

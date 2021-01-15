@@ -50,6 +50,6 @@
       echo "Erreur";
     }
 
-
+    $_SESSION['id_get'] = $_GET['id'];
 
 ?>
