@@ -190,7 +190,7 @@ class Utilisateur {
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                        <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
+                        <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle" alt="avatar"></div>
                             <div class="media-body ml-3"> <?php echo $value['login'] ?>
                             <hr>
                             <div class="container d-flex">

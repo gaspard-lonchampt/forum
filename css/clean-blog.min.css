@@ -72,3 +72,7 @@
     width: 35px;
 }
 
+/* css pour les images d'avatar sur la page des profils utilisateurs */
+.d-block.ui-w-40.rounded-circle {
+    width: 150px;
+}
