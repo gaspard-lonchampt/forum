@@ -76,3 +76,13 @@
 .d-block.ui-w-40.rounded-circle {
     width: 150px;
 }
+
+/* messages utilisateur connecté */
+
+.message_connect{
+    transform: translateX(60px);
+}
+
+.message_connect .card-header {
+    background-color: #06809b3d;
+}

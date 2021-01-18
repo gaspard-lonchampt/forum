@@ -24,7 +24,7 @@ class Messages extends Like_dislike{
 
     public function db_connexion() {
         try {
-            $bdd = new PDO("mysql:host=localhost;dbname=forum", 'root', 'root');
+            $bdd = new PDO("mysql:host=localhost;dbname=forum", 'root', '');
             $bdd -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $bdd;
         }
@@ -80,7 +80,7 @@ class Messages extends Like_dislike{
                                                                     ON conversations.id = messages.id_conversations
                                                                         WHERE conversations.id = :id
                                                                                 AND messages.id_visibilite = 0
-                                                                                    ORDER BY date_heure_post DESC
+                                                                                    ORDER BY date_heure_post ASC
         ");
 
         $requete->bindParam(':id', $_GET['id']) ;
@@ -96,7 +96,7 @@ class Messages extends Like_dislike{
         {
 
             ?>
-            <div class="container d-block p-5">
+            <div class="container d-block p-5<?php if($_SESSION['user']['login'] == $value['login']){ echo ' message_connect' ; } ?>">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card mb-4">
@@ -104,11 +104,9 @@ class Messages extends Like_dislike{
                             <div class="card-header">
                             <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
                                     <div class="media-body ml-3"> <a href=""><?= $value['login'] ; ?></a>
-                                        <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
                                     <div class="text-muted small ml-3">
                                         <div> Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
-                                        <div><strong>200 (nombre à insérer en php)</strong> de post</div>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +154,7 @@ class Messages extends Like_dislike{
                                                                     ON conversations.id = messages.id_conversations
                                                                         WHERE conversations.id = :id
                                                                                 AND messages.id_visibilite <= 1
-                                                                                    ORDER BY date_heure_post DESC
+                                                                                    ORDER BY date_heure_post ASC
         ");
         
         $requete->bindParam(':id', $_GET['id']) ;
@@ -166,15 +164,11 @@ class Messages extends Like_dislike{
 
         $result = $requete->fetchAll();
 
-        echo "<pre>";
-        echo var_dump($result);
-        echo "</pre>";
-
         $id_user = $_SESSION['user']['id'] ;
         foreach($result as $key => $value)
         {
             ?>
-            <div class="container d-block p-5" id="<?=$value['id']?>">
+            <div class="container d-block p-5<?php if($_SESSION['user']['login'] == $value['login']){ echo ' message_connect' ; } ?>" id="<?=$value['id']?>">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card mb-4">
@@ -182,11 +176,9 @@ class Messages extends Like_dislike{
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
                                     <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ; ?></a>
-                                        <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
                                     <div class="text-muted small ml-3">
                                         <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
-                                        <div><strong>200 (nombre à insérer en php)</strong> de post</div>
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +196,7 @@ class Messages extends Like_dislike{
                                             ?> 
                                     </a>       
                                 </div>
-                                <div class="px-4 pt-3"> <button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Répondre</button> </div>
+                                <div class="px-4 pt-3"> <a href="message.php?id=<?=$_GET['id'];?>#reponse"><button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Répondre</button></a> </div>
                             </div>
                         </div>
                     </div>
@@ -226,7 +218,7 @@ class Messages extends Like_dislike{
                                                                     ON conversations.id = messages.id_conversations
                                                                         WHERE conversations.id = :id
                                                                                 AND messages.id_visibilite <= 2
-                                                                                    ORDER BY date_heure_post DESC
+                                                                                    ORDER BY date_heure_post ASC
         ");
 
         $requete->bindParam(':id', $_GET['id']) ; 
@@ -237,15 +229,14 @@ class Messages extends Like_dislike{
         foreach($result as $key => $value)
         {
             ?>
-            <div class="container d-block p-5"  id="<?=$value['id']?>">
+            <div class="container d-block p-5<?php if($_SESSION['user']['login'] == $value['login']){ echo ' message_connect' ; } ?>"  id="<?=$value['id']?>">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card mb-4">
 
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
-                                    <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ; ?></a>
-                                        <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
+                                    <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ; ?></a>                      
                                     </div>
                                     <div class="text-muted small ml-3">
                                         <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
@@ -266,7 +257,7 @@ class Messages extends Like_dislike{
                                                                        parent::affiche_bouton_avec_dislike($id_user, $id);
                                             ?> 
                                     </a>                                    </div>
-                                <div class="px-4 pt-3"> <button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Répondre</button> </div>
+                                    <div class="px-4 pt-3"> <a href="message.php?id=<?=$_GET['id'];?>#reponse"><button type="button" class="btn btn-primary"><i class="ion ion-md-create"></i>&nbsp; Répondre</button></a> </div>
                             </div>
                         </div>
                     </div>
@@ -291,18 +282,20 @@ class Messages extends Like_dislike{
                                                                     ON conversations.id = messages.id_conversations
                                                                         WHERE conversations.id = :id
                                                                                 AND messages.id_visibilite <= 3
-                                                                                    ORDER BY date_heure_post DESC
+                                                                                    ORDER BY date_heure_post ASC
         ");
       
         $requete->bindParam(':id', $_GET['id']) ; 
         $requete->execute(); 
 
         $result = $requete->fetchAll();
+
+        
         $id_user = $_SESSION['user']['id'] ;
         foreach($result as $key => $value)
         {
             ?>
-            <div class="container d-block p-5"  id="<?=$value['id']?>">
+            <div class="container d-block p-5<?php if($_SESSION['user']['login'] == $value['login']){ echo ' message_connect' ; } ?>"  id="<?=$value['id']?>">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card mb-4">
@@ -310,11 +303,9 @@ class Messages extends Like_dislike{
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
                                     <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ; ?></a>
-                                        <div class="text-muted small">Il y a 12 jours (insérer en php)</div>
                                     </div>
                                     <div class="text-muted small ml-3">
                                         <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
-                                        <div><strong>200 (nombre à insérer en php)</strong> de post</div>
                                     </div>
                                 </div>
                             </div>

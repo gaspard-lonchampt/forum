@@ -9,7 +9,7 @@ if(isset($_POST['valider']))
     if(!empty($login) && !empty($password))
     {
         $user = new Utilisateur($login, $password, NULL ,NULL, NULL, NULL );
-        $user->connexionBdd("forum", "root","root");
+        $user->connexionBdd("forum", "root","");
         $result = $user->connect();
         if($result)
         {
