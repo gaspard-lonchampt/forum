@@ -74,8 +74,9 @@
 
 /* css pour les images d'avatar sur la page des profils utilisateurs */
 .d-block.ui-w-40.rounded-circle {
-    width: 150px;
-    height: 150px;
+     width: 10vw !important;
+    height: 10vw !important; 
+    object-fit: cover !important ;
 }
 
 /* messages utilisateur connecté */
