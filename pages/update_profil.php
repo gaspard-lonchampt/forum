@@ -15,19 +15,19 @@
 
     if($_POST['droit'] == 'Normal'){
         setProfile(1, $_GET['id']); 
-        $_SESSION['message'] = '<p class="valide changement_droit"> Changement effectuer </p>' ; 
+        $_SESSION['message'] = '<p class="valide changement_droit"> Changement effectué </p>' ;
         header("Location: modif_droit.php");
         exit();
     }
     elseif($_POST['droit'] == 'Modérateur'){
         setProfile(2,$_GET['id']); 
-        $_SESSION['message'] = '<p class="valide changement_droit"> Changement effectuer </p>' ; 
+        $_SESSION['message'] = '<p class="valide changement_droit"> Changement effectué</p>' ; 
         header("Location: modif_droit.php");
         exit();
     }
     elseif($_POST['droit'] == 'Administrateur'){
         setProfile(3,$_GET['id']); 
-        $_SESSION['message'] = '<p class="valide changement_droit"> Changement effectuer </p>' ; 
+        $_SESSION['message'] = '<p class="valide changement_droit"> Changement effectué </p>' ; 
         header("Location: modif_droit.php");
         exit();
     }

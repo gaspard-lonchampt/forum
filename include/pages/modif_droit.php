@@ -3,7 +3,7 @@
     $connexion = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION) ;
 
-    $requete = $connexion->prepare("SELECT login,nom,prenom,age,id FROM utilisateurs");
+    $requete = $connexion->prepare("SELECT login,nom,prenom,age,id,id_droit FROM utilisateurs");
     $requete->execute(); 
 
     $result = $requete->fetchAll(); 
@@ -35,6 +35,7 @@
         <th> Prénom </th>
         <th> Age </th>
         <th> Id </th>
+        <th> Droit </th>
         <th> Modifier id_droit </th>
     </tr>    
 
@@ -44,8 +45,30 @@
             echo '<tr></tr>' ; 
             
             for($j = 0 ; isset($result[$i][$j]) ; $j++)
-            {
-                echo '<td>'.$result[$i][$j].'</td>' ; 
+            {   
+                if($j == 5){
+
+                    if($result[$i][5] == 1)
+                    {
+                        $message =  'Utilisateur' ; 
+                        echo '<td>'.$message.'</td>'; 
+                    }
+                    elseif($result[$i][5] == 2)
+                    {
+                        $message =  'Modérateur' ; 
+                        echo '<td>'.$message.'</td>'; 
+                    }
+                    if($result[$i][5] == 3)
+                    {
+                        $message =  'Administrateur' ; 
+                        echo '<td>'.$message.'</td>'; 
+                    }
+                }
+                else{
+                    echo '<td>'.$result[$i][$j].'</td>'; 
+
+                }
+                
             }
             
             $_GET['id'] = $result[$i]['id'] ;
@@ -67,6 +90,7 @@
 
         }
         
+  
         ?>
 
 

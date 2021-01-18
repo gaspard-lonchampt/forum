@@ -13,7 +13,7 @@
         $requete->bindParam(':new_id', $droit); 
         $requete->bindParam(':id', $_GET['id']);
 
-        if($droit == 0 || $droit == 1 || $droit == 2)
+        if($droit == 1 || $droit == 2 || $droit == 3)
         {
             $requete->execute(); 
             echo 'Changement effectué';
