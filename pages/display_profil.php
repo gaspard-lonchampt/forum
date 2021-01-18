@@ -22,17 +22,35 @@
 session_start();
 
 if(!isset($_SESSION['user']))
-{
-    header("Location: ../index.php") ; 
-}
-require ('../include/pages/head.php');  
-include ('../include/pages/naviguation.php'); 
-include ("../classe/class_utilisateur.php"); 
+{  require ('../include/pages/head.php');  
+  include ('../include/pages/naviguation.php');
+  ?>
+  <div class="container mt-5 mb-5">
+  <div class="row w-75 pt-5 pb-5 border m-auto">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <h1 class="text-center text-danger text-uppercase"> Vous devez être connecté pour accèder à cette section</h1>
+      <p class="text-center text-primary">Vous allez être redirigé vers la page d'accueil</p>
 
+    </div>
+  </div>
+</div>
+
+<?php
+
+?>
+<meta http-equiv="refresh" content="3;url=../index.php" /> 
+<?php
+
+
+}
+else {
+  require ('../include/pages/head.php');  
+  include ('../include/pages/naviguation.php'); 
+  include ("../classe/class_utilisateur.php"); 
         $user = new Utilisateur(NULL, NULL, NULL ,NULL, NULL, NULL );
         $user->connexionBdd("forum", "root","root");
         $user->profilDisplay();
-
+}
 
 require ('../include/pages/footer.php'); 
 
