@@ -96,14 +96,14 @@ class Messages extends Like_dislike{
         {
 
             ?>
-            <div class="container d-block p-5<?php if($_SESSION['user']['login'] == $value['login']){ echo ' message_connect' ; } ?>">
+            <div class="container d-block p-5">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card mb-4">
 
                             <div class="card-header">
                             <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
-                                    <div class="media-body ml-3"> <a href=""><?= $value['login'] ; ?></a>
+                                    <div class="media-body ml-3"> <a href="display_profil.php"><?= $value['login'] ; ?></a>
                                     </div>
                                     <div class="text-muted small ml-3">
                                         <div> Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
@@ -175,7 +175,7 @@ class Messages extends Like_dislike{
 
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
-                                    <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ; ?></a>
+                                    <div class="media-body ml-3"> <a href="display_profil.php"><?php echo $value['login'] ; ?></a>
                                     </div>
                                     <div class="text-muted small ml-3">
                                         <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
@@ -236,7 +236,7 @@ class Messages extends Like_dislike{
 
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
-                                    <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ; ?></a>                      
+                                    <div class="media-body ml-3"> <a href="display_profil.php"><?php echo $value['login'] ; ?></a>                      
                                     </div>
                                     <div class="text-muted small ml-3">
                                         <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
@@ -302,7 +302,7 @@ class Messages extends Like_dislike{
 
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
-                                    <div class="media-body ml-3"> <a href=""><?php echo $value['login'] ; ?></a>
+                                    <div class="media-body ml-3"> <a href="display_profil.php"><?php echo $value['login'] ; ?></a>
                                     </div>
                                     <div class="text-muted small ml-3">
                                         <div>Posté le <strong> <?= $value['date_heure_post'] ; ?> </strong></div>
