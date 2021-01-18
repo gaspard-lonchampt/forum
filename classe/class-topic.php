@@ -338,6 +338,22 @@ public function compter_nombre_messages($a)
 
     }
 
+    public function conv_compter_nombre_messages($a)
+    {
+
+        $req = $this->bdd->prepare('SELECT COUNT(*) FROM messages where id_conversations = :id ');
+        $req->execute(array(
+                'id' => $a,      
+                ));
+
+
+        return $resultat_messages = $req->fetch();
+
+        // echo '<pre>';
+        // print_r($resultat_messages) ;
+        // echo '</pre>';
+
+    }
 
 
 

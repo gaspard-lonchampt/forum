@@ -67,8 +67,7 @@ class Conversation {
 
         foreach ($conversation as $key => $value ) { 
             
-            $nombre_conversations= $topic->compter_nombre_conversation($value['id']);
-            $nombre_messages = $topic->compter_nombre_messages($value['id']);
+            $nombre_messages = $topic->conv_compter_nombre_messages($value['0']);
 
             // echo "<pre>";
             // echo var_dump($conversation);
@@ -81,15 +80,14 @@ class Conversation {
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['13'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
+                            <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
                             <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['0']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
-                                <div class="media-body ml-3"> <a href=""><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>
+                                <div class="media-body ml-3"> <a href="display_profil.php"><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>
                                     <div class="text-muted small"><?php echo "Créé le&nbsp" . $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
-                                    <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
                                     <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                 </div>
                                 </div>
@@ -117,10 +115,13 @@ class Conversation {
          include ("../classe/class-topic.php");
         $topic = new Topic(NULL,NULL, NULL,NULL, NULL);
 
+        // echo "<pre>";
+        // echo var_dump($conversation);
+        // echo "</pre>";
+
         foreach ($conversation as $key => $value ) { 
             
-            $nombre_conversations= $topic->compter_nombre_conversation($value['id']);
-            $nombre_messages = $topic->compter_nombre_messages($value['id']);
+            $nombre_messages = $topic->conv_compter_nombre_messages($value['0']);
 
             ?>
         
@@ -129,15 +130,14 @@ class Conversation {
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['13'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
+                            <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
                             <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['0']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
-                                <div class="media-body ml-3"> <a href=""><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>
+                                <div class="media-body ml-3"> <a href="display_profil.php"><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>
                                     <div class="text-muted small"><?php echo "Créé le&nbsp" . $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
-                                    <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
                                     <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                 </div>
                                 </div>
@@ -168,8 +168,7 @@ class Conversation {
 
         foreach ($conversation as $key => $value ) { 
             
-            $nombre_conversations= $topic->compter_nombre_conversation($value['id']);
-            $nombre_messages = $topic->compter_nombre_messages($value['id']); 
+            $nombre_messages = $topic->conv_compter_nombre_messages($value['0']); 
 
             ?>
 
@@ -178,15 +177,14 @@ class Conversation {
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['13'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
+                            <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
                             <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['0']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
-                                <div class="media-body ml-3"> <a href=""><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>
+                                <div class="media-body ml-3"> <a href="display_profil.php"><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>
                                     <div class="text-muted small"><?php echo "Créé le&nbsp" . $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
-                                    <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
                                     <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                 </div>
                                 </div>
@@ -217,8 +215,7 @@ class Conversation {
 
         foreach ($conversation as $key => $value ) { 
             
-            $nombre_conversations= $topic->compter_nombre_conversation($value['id']);
-            $nombre_messages = $topic->compter_nombre_messages($value['id']); 
+            $nombre_messages = $topic->conv_compter_nombre_messages($value['0']); 
 
             ?>
         
@@ -227,15 +224,14 @@ class Conversation {
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['13'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
+                            <div class="media flex-wrap w-100 align-items-center"> <div class="container w-25 h-25 ml-0"><img src="../img/avatars/<?php echo $value['avatar'] ?>" class="d-block ui-w-40 rounded-circle w-100 h-100" alt="avatar"></div>
                             <div class="media-body ml-3"> <a href="message.php?id=<?php echo $value['0']?>"><?php echo $value['3'] ?></a>
                             <hr>
                             <div class="container d-flex">
-                                <div class="media-body ml-3"> <a href=""><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>
+                                <div class="media-body ml-3"> <a href="display_profil.php"><?php echo "Posté par&nbsp". "<strong>". $value['7'] ."</strong>" ?></a>
                                     <div class="text-muted small"><?php echo "Créé le&nbsp" . $value['2'] ?></div>
                                 </div>
                                 <div class="text-muted small ml-3">
-                                    <div>Nombre de conversations : <strong> <?php echo $nombre_conversations[0]; ?></strong></div>
                                     <div>Nombre de messages : <strong><?php echo $nombre_messages[0]; ?></strong></div>
                                 </div>
                                 </div>

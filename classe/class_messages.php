@@ -54,11 +54,10 @@ class Messages extends Like_dislike{
             // var_dump($result) ;
     
             $requete = $this->bdd->prepare("INSERT INTO messages (id_conversations, id_topic, id_posteur, date_heure_post, message, id_visibilite)
-                                                        VALUES (:id_conversations, :id_topic, :id_posteur, :date_heure_post, :message, :id_visibilite)
+                                                        VALUES (:id_conversations, (SELECT id_topic FROM conversations WHERE id = ".$_GET['id']."), :id_posteur, :date_heure_post, :message, :id_visibilite)
             ") ;
     
             $requete->bindParam(':id_conversations', $_GET['id']) ; 
-            $requete->bindParam(':id_topic', $_GET['id']) ; 
             $requete->bindParam(':id_posteur', $_SESSION['user']['id']) ; 
             $requete->bindParam(':date_heure_post', $date) ;
             $requete->bindParam(':message',$message) ;
@@ -166,6 +165,11 @@ class Messages extends Like_dislike{
 
 
         $result = $requete->fetchAll();
+
+        echo "<pre>";
+        echo var_dump($result);
+        echo "</pre>";
+
         $id_user = $_SESSION['user']['id'] ;
         foreach($result as $key => $value)
         {
