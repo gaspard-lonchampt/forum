@@ -21,7 +21,7 @@ class Conversation {
 
     public function db_connexion() {
         try {
-            $db = new PDO("mysql:host=localhost;dbname=forum", 'root', '');
+            $db = new PDO("mysql:host=localhost;dbname=forum", 'root', 'root');
             $db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $db;
         }

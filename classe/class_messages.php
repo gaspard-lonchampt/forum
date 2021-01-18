@@ -24,7 +24,7 @@ class Messages extends Like_dislike{
 
     public function db_connexion() {
         try {
-            $bdd = new PDO("mysql:host=localhost;dbname=forum", 'root', '');
+            $bdd = new PDO("mysql:host=localhost;dbname=forum", 'root', 'root');
             $bdd -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $bdd;
         }
