@@ -1,6 +1,6 @@
 <?php
 
-    $connexion = new PDO('mysql:host=localhost;dbname=forum', 'root', 'root');
+    $connexion = new PDO('mysql:host=localhost;dbname=forum', 'root', '');
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION) ;
 
     $requete = $connexion->prepare("SELECT login,nom,prenom,age,id FROM utilisateurs");
